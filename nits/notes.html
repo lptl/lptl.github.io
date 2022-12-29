@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <link rel="stylesheet" href="../style/nit.css">
+  <title>Notes</title>
+  </head>
+  <body style="position:relative;">
+    <ul>
+      <li>child processes and parent processed. <code>fork()</code> to create a child process from parent process. All content, including the executing program is copied from parent process to child process. To distinguish current process, for parent process, <code>fork()</code> returns pid of child process and for child process, <code>fork()</code> returns 0. Usually, the process spawn procedure is used to perform different task. So <code>exec()</code> is needed and usually used on child process. By using <code>exec()</code>, child process would execute another program and copied content will be lost. However, at this moment, the parent process still needs to use <code>wait()</code> to fetch the exit status of child process and handle its memory allocation after the termination of child process.</li>
+      <li>container three requirements: isolation, abstraction and memory constraints. If you want to implement container this logic on linux, what operations linux provide to achieve above three requirements?
+If you find related operations, you could directly achieve container on linux. For example, isolation could use <code>privileges</code>, abstraction could use <code>chroot</code> and memory constraint could use <code>rlimit</code>.</li>
+      <li>Unix systems have a single directory tree. All accessible storage must have an associated location in this single directory tree. Mounting is the act of associating a storage device to a particular location in the directory tree.  Let&#39;s say the CD-ROM device is /dev/cdrom and the chosen mount point is /media/cdrom. The corresponding command is <code>mount /dev/cdrom /media/cdrom</code>. After that command is run, a file whose location on the CD-ROM is <code>/dir/file</code> is now accessible on your system as <code>/media/cdrom/dir/file</code>. When you&#39;ve finished using the CD, you run the command <code>umount /dev/cdrom</code> or <code>umount /media/cdrom</code> (both will work; typical desktop environments will do this when you click on the “eject” or ”safely remove” button).</li>
+<li><code>chroot</code> change the root directory of a process.</li>
+    <li><code>git status</code> to check files&#39; status. <code>git add file_1 file_2</code> to put some files into staging area. <code>git commit -m &quot;message&quot;</code> to create a commit with message. Finally, use <code>git push -u origin master</code> to push all changes to master branch on remote servers. After the above flow, if you wanna track changes in master branch, use <code>git pull origin master</code> to fetch newest content to local. Local content will go missing. (Personal repository might  have <strong>main</strong> branch not <strong>master</strong> branch. )</li>
+      <li>CGI script <span class="hljs-keyword">is</span> <span class="hljs-keyword">a</span> running script <span class="hljs-keyword">on</span> web servers that use user <span class="hljs-built_in">input</span> data <span class="hljs-keyword">as</span> <span class="hljs-built_in">input</span> <span class="hljs-built_in">and</span> output html <span class="hljs-keyword">as</span> feedback <span class="hljs-keyword">to</span> users. It <span class="hljs-built_in">has</span> been replaced.</li>
+
+    </ul>
+
+  <a href="https://www.leyls.github.io">&#8599;</a>
+  </body>
+</html>
