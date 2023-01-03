@@ -79,7 +79,7 @@ text{
 .form-control {
     position: relative;
     margin: 20px 0 40px;
-    width: 190px;
+    width: 300px;
   }
   
   .form-control input {
@@ -89,7 +89,7 @@ text{
     display: block;
     width: 100%;
     padding: 15px 0;
-    font-size: 18px;
+    font-size: 32px;
     color: #fff;
   }
   
@@ -108,7 +108,7 @@ text{
   
   .form-control label span {
     display: inline-block;
-    font-size: 18px;
+    font-size: 32px;
     min-width: 5px;
     color: #fff;
     transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -126,7 +126,7 @@ text{
     background: linear-gradient(powderblue, cadetblue);
     border: none;
     outline: none;
-    font-size: 20px;
+    font-size: 28px;
     text-transform: uppercase;
     letter-spacing: 4px;
     color: white;
@@ -167,8 +167,8 @@ text{
    }
    
    .spinner {
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
     animation: spinner-y0fdc1 2s infinite ease;
     transform-style: preserve-3d;
    }
@@ -182,7 +182,7 @@ text{
    }
    
    .spinner div:nth-of-type(1) {
-    transform: translateZ(-30px) rotateY(180deg);
+    transform: translateZ(-20px) rotateY(180deg);
    }
    
    .spinner div:nth-of-type(2) {
@@ -206,7 +206,7 @@ text{
    }
    
    .spinner div:nth-of-type(6) {
-    transform: translateZ(30px);
+    transform: translateZ(20px);
    }
    
    @keyframes spinner-y0fdc1 {
