@@ -12,7 +12,7 @@
       background-attachment: fixed;
       background-size: cover;
     ">
-   <div style="display: flex; justify-content: center; margin-top: 60px; margin-bottom: 40px;">
+   <div style="display: flex; justify-content: center; margin-top: 60px; margin-bottom: 40px; height:20vh;">
      <div class="spinner" style="text-align: center;">
       <div></div>
       <div></div>
@@ -22,24 +22,24 @@
       <div></div>
     </div>
   </div>
-  <div style="display: flex; justify-content: center;">
+  <div style="display: flex; justify-content: center; height: 20vh;">
     <div class="form-control">
-      <input type="value" required="">
+      <input id="username_input" type="value" required="">
       <label>
           <span style="transition-delay:0ms">U</span><span style="transition-delay:50ms">s</span><span style="transition-delay:100ms">e</span><span style="transition-delay:150ms">r</span><span style="transition-delay:200ms">n</span><span style="transition-delay:250ms">a</span><span style="transition-delay:300ms">m</span><span style="transition-delay:350ms">e</span>
       </label>
     </div>
   </div>
-  <div style="display: flex; justify-content: center;">
+  <div style="display: flex; justify-content: center; height: 20vh;">
     <div class="form-control">
-      <input type="value" required="">
+      <input id="password_input" type="value" required="">
       <label>
           <span style="transition-delay:0ms">P</span><span style="transition-delay:50ms">a</span><span style="transition-delay:100ms">s</span><span style="transition-delay:150ms">s</span><span style="transition-delay:200ms">w</span><span style="transition-delay:250ms">o</span><span style="transition-delay:300ms">r</span><span style="transition-delay:350ms">d</span>
       </label>
     </div>
   </div>
-  <div style="display: flex; justify-content: center; margin-top: 40px;">
-    <button class="btn"> Impersonation </button>
+  <div style="display: flex; justify-content: center; margin-top: 40px; height: 10vh;">
+    <button class="btn" id="impersonation"> Impersonation </button>
   </div>
   <!-- <div style="display: flex; flex-direction: row; margin-top: 80px; justify-content: center; align-items: center;">
     <div class="card"></div>
@@ -47,4 +47,20 @@
     <div class="card"></div>
   </div> -->
   </body>
+  <script type="text/javascript">
+    document.getElementById("impersonation").onclick = function() {
+	let username = document.getElementById("username_input").value;
+	let password = document.getElementById("password_input").value;
+	let today = new Date();
+	let years = today.getFullYear();
+	let months = String(today.getMonth()+1).padStart(2, '0');
+	let days = String(today.getDate()).padStart(2, '0');
+	if(username == years && password == months + days){
+	    window.location.href = "./root.html";
+	}
+	else{
+	    window.location.href = "https://youtu.be/aof_sFAr2u0";
+	}
+    }
+  </script>
 </html>
