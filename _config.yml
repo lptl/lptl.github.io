@@ -1,0 +1,50 @@
+# -----------------------------------------------------------------------------
+# Site Settings
+# -----------------------------------------------------------------------------
+
+title: Nat
+author: lptl
+email: manpolanic@outlook.com
+description: >- # this means to ignore newlines until "baseurl:"
+  They're all written by human.
+
+# The URL of your site, e.g. https://your-username.github.io
+url: "https://lptl.github.io" 
+# For a user or organization site, this should be an empty string.
+baseurl: "" 
+
+# -----------------------------------------------------------------------------
+# Social Media Settings
+# -----------------------------------------------------------------------------
+# You can use these in your templates to link to your social profiles.
+# E.g., {{ site.social.github }}
+social:
+  github: your-github-username
+  twitter: your-twitter-username
+  linkedin: your-linkedin-username
+
+# -----------------------------------------------------------------------------
+# Build Settings
+# -----------------------------------------------------------------------------
+
+markdown: kramdown
+kramdown:
+  input: GFM # Enables GitHub Flavored Markdown (like tables, fenced code blocks)
+  hard_wrap: false
+
+# Plugins - jekyll-feed is supported by GitHub Pages and creates an RSS feed
+plugins:
+  - jekyll-feed
+
+# Exclude from processing.
+# The following items will not be processed, by default.
+# Any item listed under the `exclude:` key here will be automatically added to
+# the internal default list.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/

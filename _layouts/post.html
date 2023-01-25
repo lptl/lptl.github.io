@@ -1,0 +1,30 @@
+---
+layout: default
+---
+<article class="post">
+
+  <header class="post-header">
+    <h2 class="post-title">{{ page.title | escape }}</h2>
+    <p class="post-meta">
+        <!-- Date in YYYY.MM.DD format -->
+        <span>{{ page.date | date: "%Y.%m.%d" }}</span>
+
+        <!-- Calculate Word Count -->
+        {% assign words = content | number_of_words %}
+        {% if words < 1000 %}
+          <span>{{ words }} words</span>
+        {% else %}
+          <span>{{ words | divided_by: 1000.0 | round: 1 }}k words</span>
+        {% endif %}
+
+        <!-- Calculate Image Count -->
+        {% assign image_count = content | split: '<img' | size | minus: 1 %}
+        <span>{{ image_count }} image{% if image_count != 1 %}s{% endif %}</span>
+    </p>
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+</article>
