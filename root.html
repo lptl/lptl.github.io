@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="./style/general.css" />
+    <link rel="stylesheet" href="./style/root.css" />
     <link rel="icon" type="image/x-icon" href="./images/tak.ico" />
     <title>Ney</title>
   </head>
@@ -35,7 +35,11 @@
      Der Traum hat nichts mit dir zu tun, <br> meiner Meinung nach ist es Schlaflosigkeit. <br>
    </div>
       <div class="loader"style="margin-left: 100px;"><div></div></div>
-   
+   <audio id="musicplayer" autoplay>
+     <source src="./music/tears_of_happiness.mp3" />
+   </audio>
+
+
    <!-- <div style="display:flex;justify-content:center;align-items:center;"> -->
    <!--  <div class="card" style="margin-right: 10px;"> -->
    <!--    <div class="content"> -->
@@ -65,4 +69,9 @@
    <!--  </div> -->
    <!--  </div> -->
   </body>
+  <script type="text/javascript">
+    const musicplayer = document.querySelector('#musicplayer');
+    musicplayer.play();
+  </script>
+    
 </html>

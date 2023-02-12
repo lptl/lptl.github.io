@@ -1,7 +1,7 @@
 @font-face{
     font-family: mono_andale;
     font-weight: regular;
-    src: url('../fonts/andale.ttf')
+    src: url('../fonts/love.ttf')
 }
 
 h1{
@@ -17,6 +17,31 @@ body{
     font-weight: bold;
     margin-left: 20%;
     margin-right: 20%;
+    position: relative;
+}
+
+body:before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background-image: url(https://wpzone.co/wp-content/uploads/2019/02/hearts.png);
+    animation: falling-hearts 20s linear infinite;
+}
+@keyframes falling-hearts {
+    0% {background-position: 0% 30%;}
+}
+
+@-moz-keyframes falling-hearts {
+    0% {background-position: 0% 30%;}
+}
+
+@-webkit-keyframes falling-hearts {
+    0% {background-position: 0% 30%;}
 }
 
 a:link, a:active{
