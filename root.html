@@ -7,7 +7,7 @@
   </head>
   <body
     style="
-      background-image: url('./images/heart.jpg');
+      background-image: url('./images/hearting.jpg');
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;
@@ -68,16 +68,19 @@
    <!--    </div> -->
    <!--  </div> -->
    <!--  </div> -->
+  <div style="display: flex; justify-content: center; margin-top: 10px; margin-bottom: 10px;  height: 5vh;">
+    <button class="btn" id="jumpto_music"> ♥_♥ </button>
+  </div>
   </body>
   <script type="text/javascript">
-    const musicplayer = document.querySelector('#musicplayer');
-    musicplayer.play();
-    window.onload = function() {
-	let r = confirm("Thorsten, do you want to play music? \n(You should click yes (｡•ㅅ•｡)♡)");
-	if(r) {
-	  musicplayer.play();
+    document.getElementById("jumpto_music").onclick = function () {
+        let r = confirm("Thorsten, do you want to listen to music?\n (You should click OK) (♥ω♥*)");
+	while (r != true) {
+	    alert("Thorsten, you should click OK. (♥ω♥*)");
+	    r = confirm("Thorsten, do you want to listen to music?\n (You should click OK) (♥ω♥*)");
 	}
-    }
+	location.href = "https://youtu.be/hJpnjTCZ8dc";
+    };
   </script>
     
 </html>
