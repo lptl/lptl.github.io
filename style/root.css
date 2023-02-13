@@ -152,7 +152,6 @@ text{
     padding: 1em 1em;
     background: linear-gradient(tomato, indianred);
     border: none;
-    border-radius: 0.5em;
     outline: none;
     font-size: 28px;
     text-transform: uppercase;
@@ -172,7 +171,6 @@ text{
     height: 15px;
     background-color: indianred;
     position: absolute;
-    border-radius: 0.5em;
     bottom: 0;
     right: 0;
     transform: rotateX(90deg);
@@ -183,7 +181,6 @@ text{
     content: "";
     width: 15px;
     height: 100%;
-    border-radius: 0.5em;
     background-color: pink;
     position: absolute;
     top: 0;
@@ -193,7 +190,6 @@ text{
    }
    
    .btn:hover {
-    border-radius: 0.5em;
     transform: rotateX(30deg) rotateZ(0);
    }
    
