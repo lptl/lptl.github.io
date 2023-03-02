@@ -1,7 +1,7 @@
 @font-face{
     font-family: mono_andale;
     font-weight: regular;
-    src: url('../fonts/andale.ttf')
+    src: url('../fonts/synoym.otf')
 }
 
 h1{
@@ -127,7 +127,7 @@ text{
     border: none;
     outline: none;
     font-size: 28px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     letter-spacing: 4px;
     color: white;
     font-family: mono_andale;

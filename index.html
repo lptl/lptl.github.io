@@ -33,7 +33,7 @@
     </div>
     <div style="display: flex; justify-content: center; height: 20vh">
       <div class="form-control">
-        <input id="username_input" type="value" required="" />
+    <input id="username_input" type="value" required="" style="margin-top: 20px;"/>
         <label>
           <span style="transition-delay: 0ms">U</span
           ><span style="transition-delay: 50ms">s</span
@@ -48,7 +48,7 @@
     </div>
     <div style="display: flex; justify-content: center; height: 20vh">
       <div class="form-control">
-        <input id="password_input" type="value" required="" />
+    <input id="password_input" type="value" required="" style="margin-top: 20px;"/>
         <label>
           <span style="transition-delay: 0ms">P</span
           ><span style="transition-delay: 50ms">a</span
@@ -61,6 +61,7 @@
         </label>
       </div>
     </div>
+    <div style="display: flex; font-size: 20px; justify-content: center; height: 5vh">The password and username is your name.</div>
     <div
       style="
         display: flex;
@@ -69,7 +70,7 @@
         height: 10vh;
       "
     >
-      <button class="btn" id="impersonation">Impersonation</button>
+      <button class="btn" id="impersonation">Dive In</button>
     </div>
     <!-- <div style="display: flex; flex-direction: row; margin-top: 80px; justify-content: center; align-items: center;">
     <div class="card"></div>
@@ -89,9 +90,16 @@
       let years = today.getFullYear();
       let months = String(today.getMonth() + 1).padStart(2, "0");
       let days = String(today.getDate()).padStart(2, "0");
-      if (username == years && password == months + days) {
+      if (username == "Thorsten" && password == "Thorsten") {
         window.location.href = "./root.html";
-      } else {
+      }
+      else if(username == "Nat" && password == "Nat"){
+	  window.location.href = "./intro.html"
+      }
+      else if(username == years && password == months + days){
+ 	  window.location.href = "./man.html"
+      }
+      else {
         window.location.href = songs[Math.floor(Math.random() * songs.length)];
       }
     };
