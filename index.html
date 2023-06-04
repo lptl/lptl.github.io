@@ -33,7 +33,12 @@
     </div>
     <div style="display: flex; justify-content: center; height: 20vh">
       <div class="form-control">
-    <input id="username_input" type="value" required="" style="margin-top: 20px;"/>
+        <input
+          id="username_input"
+          type="value"
+          required=""
+          style="margin-top: 20px"
+        />
         <label>
           <span style="transition-delay: 0ms">U</span
           ><span style="transition-delay: 50ms">s</span
@@ -48,7 +53,12 @@
     </div>
     <div style="display: flex; justify-content: center; height: 20vh">
       <div class="form-control">
-    <input id="password_input" type="value" required="" style="margin-top: 20px;"/>
+        <input
+          id="password_input"
+          type="value"
+          required=""
+          style="margin-top: 20px"
+        />
         <label>
           <span style="transition-delay: 0ms">P</span
           ><span style="transition-delay: 50ms">a</span
@@ -61,7 +71,16 @@
         </label>
       </div>
     </div>
-    <div style="display: flex; font-size: 20px; justify-content: center; height: 5vh">The password and username is your name.</div>
+    <div
+      style="
+        display: flex;
+        font-size: 20px;
+        justify-content: center;
+        height: 5vh;
+      "
+    >
+      the password and username could be your name
+    </div>
     <div
       style="
         display: flex;
@@ -70,7 +89,7 @@
         height: 10vh;
       "
     >
-      <button class="btn" id="impersonation">Dive In</button>
+      <button class="btn" id="impersonation">Dive</button>
     </div>
     <!-- <div style="display: flex; flex-direction: row; margin-top: 80px; justify-content: center; align-items: center;">
     <div class="card"></div>
@@ -82,6 +101,12 @@
     const songs = [
       "https://youtu.be/QW-vTEJjsBQ",
       "https://youtu.be/iyDGr2g6iaY",
+      "https://youtu.be/HQH1snAzwKE",
+      "https://youtu.be/VEFTK1stlGo",
+      "https://youtu.be/ZSy-jnG1rb0",
+      "https://youtu.be/5urmCSU-9vU",
+      "https://youtu.be/uo33QyBaZ4w",
+      "https://youtu.be/r3bd6GadhZw",
     ];
     document.getElementById("impersonation").onclick = function () {
       let username = document.getElementById("username_input").value;
@@ -92,14 +117,11 @@
       let days = String(today.getDate()).padStart(2, "0");
       if (username == "Thorsten" && password == "Thorsten") {
         window.location.href = "./root.html";
-      }
-      else if(username == "Nat" && password == "Nat"){
-	  window.location.href = "./intro.html"
-      }
-      else if(username == years && password == months + days){
- 	  window.location.href = "./man.html"
-      }
-      else {
+      } else if (username == "Nat" && password == "Nat") {
+        window.location.href = "./intro.html";
+      } else if (username == years && password == months + days) {
+        window.location.href = "./man.html";
+      } else {
         window.location.href = songs[Math.floor(Math.random() * songs.length)];
       }
     };
