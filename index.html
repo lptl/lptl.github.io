@@ -8,32 +8,124 @@
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
 
       :root {
-        --primary-color: #c9c987;
+        --primary-color: rgb(37, 100, 189);
         --secondary-color: #2c3e50;
-        --background-color: #ecf0f1;
+        --background-color: rgba(255, 255, 255, 0.3);
+        --non-readable-color: rgba(255, 255, 255, 0.2);
+        --transparent-color: rgba(255, 255, 255, 0);
+        --text-color: #000000;
+      }
+
+      @font-face {
+        font-family: "Architex";
+        src: url("fonts/architex.ttf");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Alphabetized";
+        src: url("fonts/alphabetized.ttf");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Allison";
+        src: url("fonts/allison.otf");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Rabiohead";
+        src: url("fonts/rabiohead.ttf");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
       }
 
       body {
-        font-family: "Poppins", sans-serif;
-        line-height: 1.6;
+        font-family: "Helvetica", serif;
+        line-height: 1.8;
         margin: 0;
         padding: 0;
-        background-color: var(--background-color);
-        color: var(--secondary-color);
+        color: var(--text-color);
+        background-image: url("images/sea.png");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
       }
 
       header {
-        background: var(--primary-color);
-        color: white;
+        background: var(--transparent-color);
+        color: var(--primary-color);
         padding: 1rem;
         text-align: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        max-width: 20%; /* Added max-width */
+        margin: 0 auto; /* Center the header */
       }
 
       header h1 {
-        margin: 0;
-        font-size: 2.5rem;
+        font-family: "Allison";
+        font-size: clamp(80px, 2vw, 120px);
         animation: fadeIn 1s ease-out;
+      }
+
+      a {
+        color: #0077cc;
+        text-decoration: none;
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      a::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #0077cc;
+        transform: scaleX(0);
+        transform-origin: bottom right;
+        transition: transform 0.3s ease;
+      }
+
+      a:hover {
+        color: #005fa3;
+      }
+
+      a:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+      }
+
+      /* Specific styles for navigation links */
+      nav a {
+        color: #333;
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      nav a:hover {
+        background-color: #0077cc;
+        color: #fff;
+      }
+
+      nav a::after {
+        display: none;
       }
 
       .container {
@@ -41,6 +133,43 @@
         max-width: 800px;
         margin: 2rem auto;
         overflow: hidden;
+        flex: 1 0 auto;
+      }
+
+      .container h2 {
+        color: var(--primary-color);
+        margin-top: 0;
+      }
+
+      .post-date {
+        position: absolute;
+        font-family: "Rabiohead";
+        top: 10px;
+        right: 10px;
+        background-color: var(--transparent-color);
+        color: rgb(19, 19, 19);
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        transform: rotate(3deg);
+        transition: transform 0.3s ease;
+      }
+
+      .post-date:hover {
+        transform: rotate(0deg) scale(1.05);
+        color: rgb(255, 255, 15);
+      }
+
+      .post-date .day {
+        font-size: 1.5em;
+        display: block;
+        text-align: center;
+      }
+
+      .post-date .month-year {
+        font-size: 0.8em;
+        display: block;
+        text-align: center;
       }
 
       .blog-post {
@@ -48,18 +177,27 @@
         border-radius: 8px;
         margin-bottom: 2rem;
         padding: 2rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background: var(--background-color);
+        box-shadow: 0 12px 10px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
 
       .blog-post:hover {
-        transform: translateY(-5px);
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
       }
 
       .blog-post h2 {
+        font-family: "Rabiohead", sans-serif;
+        font-size: clamp(30px, 2vw, 50px);
         color: var(--primary-color);
         margin-top: 0;
+      }
+
+      .blog-post h2:hover {
+        color: #0f3372;
+        transform: rotate(1deg) scale(1.05);
       }
 
       .blog-post time {
@@ -68,10 +206,15 @@
       }
 
       footer {
+        font-family: "Allison";
+        font-size: clamp(10px, 2vw, 20px);
+        font-weight: bold;
         text-align: center;
         padding: 1rem;
-        background: var(--secondary-color);
-        color: white;
+        background: var(--transparent-color);
+        color: var(--primary-color);
+        width: 100%;
+        flex-shrink: 0;
       }
 
       @keyframes fadeIn {
@@ -93,7 +236,7 @@
       @keyframes slideIn {
         from {
           opacity: 0;
-          transform: translateX(-50px);
+          transform: translateY(-50px);
         }
         to {
           opacity: 1;
@@ -109,17 +252,17 @@
 
     <div class="container">
       <article class="blog-post">
-        <h2>Welcome to My Fancy Blog</h2>
-        <p><time datetime="2024-07-15">July 15, 2024</time></p>
+        <h2>What does it mean</h2>
+        <div class="post-date" datetime="2024-07-15"></div>
         <p>
-          This is the beginning of my journey into the world of blogging. Join
-          me as we explore various topics and ideas together!
+          If you normally consider things complicately, the relationship between
+          humans will become a joke because no one take anyone seriously.
         </p>
       </article>
 
       <article class="blog-post">
         <h2><a href="posts/post.html">The Art of Web Design</a></h2>
-        <p><time datetime="2024-07-16">July 16, 2024</time></p>
+        <div class="post-date" datetime="2024-07-16"></div>
         <p>
           Today, we'll dive into the principles of modern web design and how to
           create visually appealing and user-friendly websites.
@@ -128,7 +271,69 @@
     </div>
 
     <footer>
-      <p>&copy; 2024 My Fancy Blog. All rights reserved.</p>
+      <p>&copy; 2024 Nat. Something is not going to happen</p>
     </footer>
+
+    <!-- <script>
+      function setTheme() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const totalMinutes = hours * 60 + minutes;
+
+        // Calculate hue based on time (0-360 degrees)
+        const hue = (totalMinutes / 1440) * 360;
+
+        // Calculate lightness (darker at night, lighter during the day)
+        const lightness = Math.sin((totalMinutes / 1440) * Math.PI) * 20 + 70;
+
+        // Primary color
+        const primaryColor = `hsl(${hue}, 70%, 45%)`;
+
+        // Background color (very light version of primary color)
+        const backgroundColor = `hsl(${hue}, 70%, 95%)`;
+
+        // Text color (dark version of primary color)
+        const textColor = `hsl(${hue}, 70%, 20%)`;
+
+        document.documentElement.style.setProperty(
+          "--primary-color",
+          primaryColor
+        );
+        document.documentElement.style.setProperty("--text-color", textColor);
+      }
+
+      // Set the initial theme
+      setTheme();
+
+      // Update the theme every minute
+      setInterval(setTheme, 5000);
+    </script> -->
+
+    <script>
+      // ... your existing JavaScript ...
+
+      // Function to format the date
+      function formatDate(date) {
+        const day = date.getDate();
+        const month = date.toLocaleString("default", { month: "short" });
+        const year = date.getFullYear();
+        return `<span class="day">${day}</span><span class="month-year">${month} ${year}</span>`;
+      }
+
+      // Update all post dates
+      function updatePostDates() {
+        const postDates = document.querySelectorAll(".post-date");
+        postDates.forEach((dateElement) => {
+          const date = new Date(
+            dateElement.getAttribute("datetime") || Date.now()
+          );
+          dateElement.innerHTML = formatDate(date);
+        });
+      }
+
+      // Call the function to update dates
+      updatePostDates();
+    </script>
   </body>
 </html>
