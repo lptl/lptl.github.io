@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Post Title - My Fancy Blog</title>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+      </script>
+      <script type="text/javascript"
+        src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+      </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Merriweather:wght@300;400;700&display=swap");
+
+      :root {
+        --primary-color: #3498db;
+        --secondary-color: #2c3e50;
+        --background-color: rgba(255, 255, 255, 0.5);
+        --transparent-color: rgba(255, 255, 255, 0);
+        --text-color: #333;
+      }
+
+
+      @font-face {
+        font-family: "Architex";
+        src: url("../fonts/architex.ttf");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Alphabetized";
+        src: url("../fonts/alphabetized.ttf");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Allison";
+        src: url("../fonts/allison.otf");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Rabiohead";
+        src: url("../fonts/rabiohead.ttf");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+
+      a {
+        font-family: "Helvetica";
+        font-weight: bold;
+        color: #0077cc;
+        text-decoration: none;
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      a::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #0077cc;
+        transform: scaleX(0);
+        transform-origin: bottom right;
+        transition: transform 0.3s ease;
+      }
+
+      a:hover {
+        color: #005fa3;
+        transform: scale(1.1) rotate(3deg);
+      }
+
+      a:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom center;
+      }
+
+      /* Specific styles for navigation links */
+      nav a {
+        color: #333;
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      nav a:hover {
+        background-color: #0077cc;
+        color: #fff;
+      }
+
+      nav a::after {
+        display: none;
+      }
+
+      .post-date {
+        position: absolute;
+        font-family: "Rabiohead";
+        top: 10px;
+        right: 10px;
+        background-color: var(--transparent-color);
+        color: rgb(19, 19, 19);
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        transform: rotate(3deg);
+        transition: transform 0.3s ease;
+      }
+
+      .post-date:hover {
+        transform: rotate(0deg) scale(1.05);
+        color: rgb(255, 255, 15);
+      }
+
+      .post-date .day {
+        font-size: 1.5em;
+        display: block;
+        text-align: center;
+      }
+
+      .post-date .month-year {
+        font-size: 0.8em;
+        display: block;
+        text-align: center;
+      }
+
+      body {
+        font-family: "Helvetica";
+        line-height: 1.4;
+        font-size: clamp(10px, 1vw, 15px);
+        margin: 0;
+        padding: 0;
+        color: var(--text-color);
+        background-image: url("../images/banboo.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+      }
+
+      header {
+        background: var(--transparent-color);
+        color: white;
+        padding: 0.5rem 1rem; /* Reduced padding */
+        text-align: center; /* Aligned text to the left */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 0.5rem; /* Reduced from 1rem to 0.5rem */
+        max-width: 10%; /* Added max-width */
+        margin: 0 auto; /* Center the header */
+        -webkit-backdrop-filter: blur(10px);
+        position: fixed; /* Fixed position */
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+      }
+
+      header h1 {
+        font-family: "Rabiohead";
+        margin: 0;
+        font-size: 1.5rem; /* Reduced font size */
+      }
+
+      .container {
+        width: 90%;
+        max-width: 800px;
+        margin: 4rem auto 2rem; /* Increased top margin to account for fixed header */
+        background: var(--background-color);
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+
+      .post-header {
+        margin-bottom: 2rem;
+      }
+
+      .post-title {
+        color: var(--secondary-color);
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        font-family: "Rabiohead", sans-serif;
+      }
+
+      .post-meta {
+        color: #7f8c8d;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .post-content p {
+        margin-bottom: 1.5rem;
+      }
+
+      .post-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin: 1rem 0;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 2rem;
+        color: var(--primary-color);
+        text-decoration: none;
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+      }
+
+      .back-link:hover {
+        text-decoration: underline;
+      }
+
+      footer {
+        font-family: "Allison";
+        font-size: clamp(10px, 2vw, 20px);
+        font-weight: bold;
+        text-align: center;
+        padding: 1rem;
+        background: var(--transparent-color);
+        color: white;
+        width: 100%;
+        flex-shrink: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <article class="post">
+        <div class="post-header">
+          <h2 class="post-title">YOLO V1 to V10</h2>
+          <div class="post-meta">
+            <span
+              >Published on
+              <time datetime="2024-07-16">July 16, 2024</time></span
+            >
+            <span>by </span><span style="font-family: 'Allison'; font-weight: bold;">Nat</span>
+          </div>
+        </div>
+        <div class="post-content">
+          </p>
+          <p>Refered paper <a href="https://arxiv.org/html/2406.10139v1"> YOLOv1 to YOLOv10: A comprehensive review of YOLO variants and their application in the agricultural domain</a>。</p>
+          <p>YOLO model series are single-stage object detectors, where the two steps of two-stage object detectors are merged together. The two steps of two-stage
+          object detector is firstly proposing candidate regions and then perform classification and localisation in the proposed regions. Single-stage object detectors directly predict
+          bounding boxes and probability scores given input image.
+          </p>
+          <h3>YOLOV1</h3>
+          Data processing,
+          <br>
+          The input image is splitted into $s\times s$ cells through a $s\times s$ grid. For each object in the image, the cell which contains the center of an object will 
+          have the ground truth of probability score as 1 while other cells, even if they contain parts of the object, will have ground truth of probability score as 0. Then there will be a bounding
+          box on the grid cell that contains the center of the object represented by coordinates, width and height. Each bounding box will also have a confidence score and the 
+          confidence score, which is defined as the product of the probability of the object locating inside the call and the IoU between  bounding box and ground truth object region, will be 1.
+          \[Confidence = p(j)\times IoU\]
+          <br>
+          During training,
+          <br>
+          The model will predict $B$ bounding boxes with specific dimensions and confidence score for each grid cells, causing $s\times s\times B$ bounding boxes for one image input. The loss is calculated
+          through the bounding box location difference, the confidence score difference and the probability predicted for the cell that it contains the object $i$.
+          <br>
+          During inferencing,
+          Given an image as input, the model will predict $s\times s\times B$ bounding boxes. For each cell, there would be $B$ bounding boxes. Each cell will have a multiclassification probability output representing
+          its probability of containing the center of every object. Then the bounding box in the cell will have location information and confidence score to represent the area of overlap between the bounding box and the object.
+          Because the huge number of bounding boxes, NMS(non-maximum suppresion) is also used to reduce bounding boxes amount.
+        </div>
+      </article>
+      <a href="../index.html">← Back to Blog</a>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 Nat. The Art of Web Design</p>
+    </footer>
+
+    <script>
+      // ... your existing JavaScript ...
+
+      // Function to format the date
+      function formatDate(date) {
+        const day = date.getDate();
+        const month = date.toLocaleString("default", { month: "short" });
+        const year = date.getFullYear();
+        return `<span class="day">${day}</span><span class="month-year">${month} ${year}</span>`;
+      }
+
+      // Update all post dates
+      function updatePostDates() {
+        const postDates = document.querySelectorAll(".post-date");
+        postDates.forEach((dateElement) => {
+          const date = new Date(
+            dateElement.getAttribute("datetime") || Date.now()
+          );
+          dateElement.innerHTML = formatDate(date);
+        });
+      }
+
+      // Call the function to update dates
+      updatePostDates();
+    </script>
+  </body>
+</html>
