@@ -1,129 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <link rel="stylesheet" href="./style/general.css" />
-    <link rel="icon" type="image/x-icon" href="./images/tak.ico" />
-    <title>Ney</title>
-  </head>
-  <body
-    style="
-      background-image: url('./images/tak.jpg');
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-    "
-  >
-    <div
-      style="
-        display: flex;
-        justify-content: center;
-        margin-top: 60px;
-        margin-bottom: 40px;
-        height: 20vh;
-      "
-    >
-      <div class="spinner" style="text-align: center">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
-    <div style="display: flex; justify-content: center; height: 20vh">
-      <div class="form-control">
-        <input
-          id="username_input"
-          type="value"
-          required=""
-          style="margin-top: 20px"
-        />
-        <label>
-          <span style="transition-delay: 0ms">U</span
-          ><span style="transition-delay: 50ms">s</span
-          ><span style="transition-delay: 100ms">e</span
-          ><span style="transition-delay: 150ms">r</span
-          ><span style="transition-delay: 200ms">n</span
-          ><span style="transition-delay: 250ms">a</span
-          ><span style="transition-delay: 300ms">m</span
-          ><span style="transition-delay: 350ms">e</span>
-        </label>
-      </div>
-    </div>
-    <div style="display: flex; justify-content: center; height: 20vh">
-      <div class="form-control">
-        <input
-          id="password_input"
-          type="value"
-          required=""
-          style="margin-top: 20px"
-        />
-        <label>
-          <span style="transition-delay: 0ms">P</span
-          ><span style="transition-delay: 50ms">a</span
-          ><span style="transition-delay: 100ms">s</span
-          ><span style="transition-delay: 150ms">s</span
-          ><span style="transition-delay: 200ms">w</span
-          ><span style="transition-delay: 250ms">o</span
-          ><span style="transition-delay: 300ms">r</span
-          ><span style="transition-delay: 350ms">d</span>
-        </label>
-      </div>
-    </div>
-    <div
-      style="
-        display: flex;
-        font-size: 20px;
-        justify-content: center;
-        height: 5vh;
-      "
-    >
-      the password and username could be your name
-    </div>
-    <div
-      style="
-        display: flex;
-        justify-content: center;
-        margin-top: 40px;
-        height: 10vh;
-      "
-    >
-      <button class="btn" id="impersonation">Dive</button>
-    </div>
-    <!-- <div style="display: flex; flex-direction: row; margin-top: 80px; justify-content: center; align-items: center;">
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-  </div> -->
-  </body>
-  <script type="text/javascript">
-    const songs = [
-      "https://youtu.be/QW-vTEJjsBQ",
-      "https://youtu.be/iyDGr2g6iaY",
-      "https://youtu.be/HQH1snAzwKE",
-      "https://youtu.be/VEFTK1stlGo",
-      "https://youtu.be/ZSy-jnG1rb0",
-      "https://youtu.be/5urmCSU-9vU",
-      "https://youtu.be/uo33QyBaZ4w",
-      "https://youtu.be/r3bd6GadhZw",
-    ];
-    document.getElementById("impersonation").onclick = function () {
-      let username = document.getElementById("username_input").value;
-      let password = document.getElementById("password_input").value;
-      let today = new Date();
-      let years = today.getFullYear();
-      let months = String(today.getMonth() + 1).padStart(2, "0");
-      let days = String(today.getDate()).padStart(2, "0");
-      if (username == "Lptl" && password == "Lptl") {
-        window.location.href = "./root.html";
-      } else if (username == "Nat" && password == "Nat") {
-        window.location.href = "./intro.html";
-      } else if (username == years && password == months + days) {
-        window.location.href = "./man.html";
-      } else {
-        window.location.href = songs[Math.floor(Math.random() * songs.length)];
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Blog</title>
+    <style>
+      /* You can add your CSS here */
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
       }
-    };
-  </script>
+      header {
+        background: #f4f4f4;
+        padding: 1rem;
+        text-align: center;
+      }
+      .container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+      }
+      .blog-post {
+        background: #fff;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>My Blog</h1>
+    </header>
+
+    <div class="container">
+      <article class="blog-post">
+        <h2>My First Blog Post</h2>
+        <p>Published on <time datetime="2024-07-15">July 15, 2024</time></p>
+        <p>
+          This is the content of my first blog post. You can write your
+          thoughts, ideas, or any other content here.
+        </p>
+      </article>
+
+      <article class="blog-post">
+        <h2>Another Blog Post</h2>
+        <p>Published on <time datetime="2024-07-16">July 16, 2024</time></p>
+        <p>
+          Here's another blog post. You can add as many of these as you like.
+        </p>
+      </article>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 My Blog. All rights reserved.</p>
+    </footer>
+  </body>
 </html>
