@@ -3,13 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog Post Title - My Fancy Blog</title>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-      </script>
-      <script type="text/javascript"
-        src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-      </script>
+    <title>Nat</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global',
+                mathmlSpacing: true,
+                displayAlign: 'center',
+                displayIndent: '2em',
+                minScale: .5,
+                mtextFont: ['Latin-Modern']
+            }, 
+            chtml: {
+                mathmlSpacing: true,
+                displayAlign: 'center',
+                displayIndent: '2em',
+                minScale: .5,
+                mtextFont: ['Latin-Modern']
+            },
+            startup: {
+                pageReady: () => {
+                return MathJax.startup.defaultPageReady().then(() => {
+                    document.body.classList.add('mathjax-rendered');
+                });
+                }
+            }
+        };
+    </script>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Merriweather:wght@300;400;700&display=swap");
 
@@ -21,6 +46,19 @@
         --text-color: #333;
       }
 
+      .mathjax-rendered .MathJax, 
+    
+      .mathjax-rendered .MJX-TEX {
+        font-style: normal !important;
+      }
+    
+      .mathjax-rendered .mjx-i {
+        font-style: normal !important;
+      }
+    
+      .mathjax-rendered mjx-container[jax="CHTML"][display="true"] {
+        font-style: normal !important;
+      }
 
       @font-face {
         font-family: "Architex";
