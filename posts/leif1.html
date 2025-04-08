@@ -38,7 +38,7 @@
         --primary-text: rgb(40, 40, 42);
         --separator-color: rgba(60, 60, 67, 0.2);
         --container-background-rgb: 248, 248, 250;
-        --container-background: rgba(var(--container-background-rgb), 0.7);
+        --container-background: rgba(var(--container-background-rgb), 0.6);
         --input-background: rgba(118, 118, 128, 0.12);
         --shadow-color: rgba(0, 0, 0, 0.08);
         --link-color: var(--primary-accent); /* Use the dynamic variable */
@@ -72,6 +72,11 @@
         src: url("../fonts/rabiohead.ttf");
       }
 
+      @font-face {
+        font-family: "Andale";
+        src: url("../fonts/andale.ttf");
+      }
+
       html {
         scroll-behavior: smooth;
       }
@@ -90,7 +95,7 @@
         padding: 0;
         color: var(--primary-text);
         /* IMPORTANT: Ensure this background image path is correct */
-        background-image: url("../images/banboo.jpg");
+        background-image: url("../images/dark.jpg");
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -195,7 +200,7 @@
         margin: 0 0.1em;
         font-size: 88%;
         border-radius: 4px;
-        font-family: "SF Mono", Monaco, Consolas, monospace;
+        font-family: Andale, Menlo;
         color: var(--code-text);
         border: 1px solid var(--code-border);
       }
@@ -203,7 +208,7 @@
         background-color: var(--code-bg);
         border: 1px solid var(--code-border);
         color: var(--code-text);
-        font-family: "SF Mono", Monaco, Consolas, monospace;
+        font-family: Andale, Menlo;
         font-size: 0.9em;
         line-height: 1.6;
         margin: 1.5em 0;
@@ -322,7 +327,7 @@
         margin: 0 0.1em;
         font-size: 90%;
         border-radius: 4px;
-        font-family: "SF Mono", Monaco, Consolas, monospace;
+        font-family: Andale, Menlo;
         color: var(--code-text);
         border: 1px solid var(--code-border);
       }
@@ -330,7 +335,7 @@
         background-color: var(--code-bg);
         border: 1px solid var(--code-border);
         color: var(--code-text);
-        font-family: "SF Mono", Monaco, Consolas, monospace;
+        font-family: Andale, Menlo;
         font-size: 0.85em;
         line-height: 1.6;
         margin: 1em 0;
@@ -440,11 +445,11 @@
     <div class="container">
       <article class="post">
         <div class="post-header">
-          <h2 class="post-title">YOLO V1 to V10</h2>
+          <h2 class="post-title">Leif Magic Series 1</h2>
           <div class="post-meta">
             <span
               >Published on
-              <time datetime="2024-07-16">July 16, 2024</time></span
+              <time datetime="2025-04-08">Apr 08, 2025</time></span
             >
             <span> by </span
             ><span style="font-family: 'Allison'; font-weight: bold">Nat</span>
@@ -454,25 +459,21 @@
           <p>Loading content...</p>
         </div>
         <textarea id="markdown-source" style="display: none">
-Refered paper: [YOLOv1 to YOLOv10: A comprehensive review of YOLO variants and their application in the agricultural domain](https://arxiv.org/html/2406.10139v1).
+Leif Magic breathes the air of ancient tradition. From forgotten epochs, whispers persisted of 
+symbols carrying an innate resonance, a power that surged when brought into specific alignment. 
+These true combinations, however, remained elusive, shrouded in fragmented lore and the mists of time.
+Initial breakthroughs, hard-won by dedicated seekers, provided potent tools heavily employed during 
+the bitter Locn War. The aftermath saw a flourishing of arcane scholarship, as researchers diligently
+ uncovered the fundamental laws governing the symbols and the currents of Leif Magic itself. The Leif 
+ Magic Series represents the culmination of this period of enlightenment.
 
-YOLO model series are single-stage object detectors, where the two steps of two-stage object detectors are merged together. The two steps of two-stage object detector is firstly proposing candidate regions and then perform classification and localisation in the proposed regions. Single-stage object detectors directly predict bounding boxes and probability scores given input image.
-
-### YOLOV1
-
-**Data processing**
-
-The input image is split into $s \times s$ cells through a $s \times s$ grid. For each object in the image, the cell which contains the center of an object will have the ground truth of probability score as 1 while other cells, even if they contain parts of the object, will have ground truth of probability score as 0. Then there will be a bounding box on the grid cell that contains the center of the object represented by coordinates, width and height. Each bounding box will also have a confidence score and the confidence score, which is defined as the product of the probability of the object locating inside the cell and the IoU between bounding box and ground truth object region, will be 1.
-$$Confidence = p(object) \times IoU_{pred}^{truth}$$
-
-**During training**
-
-The model will predict $B$ bounding boxes with specific dimensions and confidence score for each grid cells, causing $s \times s \times B$ bounding boxes for one image input. The loss is calculated through the bounding box location difference, the confidence score difference and the probability predicted for the cell that it contains the object $i$.
-
-**During inferencing**
-
-Given an image as input, the model will predict $s \times s \times B$ bounding boxes. For each cell, there would be $B$ bounding boxes. Each cell will have a multiclassification probability output representing its probability of containing the center of every object. Then the bounding box in the cell will have location information and confidence score to represent the area of overlap between the bounding box and the object. Because the huge number of bounding boxes, NMS (Non-Maximum Suppression) is also used to reduce bounding boxes amount.
-          <!-- Rest of your markdown -->
+Yet, the shadow of the Urop War now stretches long. The quiet halls of research have fallen silent; 
+the focus has violently shifted to the raw utility of magic in a time of desperate struggle. Therefore, 
+we begin this series with a practical demonstration – the construction known as a Souq. 
+Observe the sequence below. This is the Souq that compels the service of Skeleton Troops.
+| Souq Format                                     | Skeleton Troops                                         |
+| :--------------------------------------------: | :----------------------------------------------: |
+| ![Souq Example](../images/leif1-1.png "Souq 09876") | ![Souq Example](../images/09876.png "09876")   |
         </textarea>
       </article>
       <br />
@@ -514,7 +515,7 @@ Given an image as input, the model will predict $s \times s \times B$ bounding b
     <!-- End Comments Section -->
 
     <footer>
-      <p>© 2024 Nat. YOLOV1 to V10</p>
+      <p>© 2024 Nat. Leif Magic Series 1</p>
     </footer>
 
     <script>
@@ -667,18 +668,47 @@ Given an image as input, the model will predict $s \times s \times B$ bounding b
         const renderAreaElement = document.getElementById(
           "markdown-render-area"
         );
+        // ... other console logs ...
+
         if (
           markdownSourceElement &&
           renderAreaElement &&
           typeof marked !== "undefined"
         ) {
-          marked.setOptions({ breaks: true, gfm: true });
-          const markdownText = markdownSourceElement.value;
-          const htmlContent = marked.parse(markdownText);
-          renderAreaElement.innerHTML = htmlContent;
-          setTimeout(() => triggerMathJax(renderAreaElement), 100); // Delay helps MathJax find elements
+          console.log("Setup OK: Elements found and marked library loaded.");
+          try {
+            // Configure marked
+            marked.setOptions({
+              breaks: false, // <<< SET TO FALSE
+              gfm: true, // Keep gfm: true for other features like tables, etc.
+            });
+            const markdownText = markdownSourceElement.value;
+            console.log(`Markdown Text read (length: ${markdownText.length})`);
+
+            if (!markdownText) {
+              console.warn("Markdown source textarea is empty!");
+            }
+
+            const htmlContent = marked.parse(markdownText); // Parse Markdown
+            console.log("Markdown parsed successfully.");
+
+            renderAreaElement.innerHTML = htmlContent; // Render HTML
+            console.log("SUCCESS: renderAreaElement.innerHTML updated.");
+
+            console.log("Queueing MathJax for main content...");
+            setTimeout(() => triggerMathJax(renderAreaElement), 100);
+          } catch (error) {
+            console.error("ERROR during Markdown parsing or rendering:", error);
+            if (renderAreaElement)
+              renderAreaElement.innerHTML = `<p style="color: red; font-weight: bold;">Error rendering content: ${error.message}</p>`;
+          }
         } else {
-          console.error("Markdown rendering setup failed."); /* ... */
+          console.error(
+            "Markdown Rendering Setup FAILED. Reasons logged above."
+          );
+          if (renderAreaElement)
+            renderAreaElement.innerHTML =
+              "<p>Error loading content - initial setup failed.</p>";
         }
 
         // --- Comments Functionality ---

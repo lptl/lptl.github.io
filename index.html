@@ -3,45 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nat</title>
+    <title>Nat - Blog</title>
+    <!-- Added Blog to title -->
+
+    <!-- Styles -->
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
 
       :root {
         --primary-color: rgb(37, 100, 189);
         --secondary-color: #2c3e50;
-        --background-color: rgba(255, 255, 255, 0.3);
+        /* Increased alpha for better readability on background */
+        --background-color: rgba(255, 255, 255, 0.45);
         --non-readable-color: rgba(255, 255, 255, 0.2);
-        --transparent-color: rgba(255, 255, 255, 0);
-        --text-color: #000000;
+        --transparent-color: rgba(
+          40,
+          40,
+          40,
+          0.1
+        ); /* Slightly darker transparent */
+        --text-color: #1a1a1a; /* Darker text for better contrast */
+        --link-color: #006bb3;
+        --link-hover-color: #004c80;
+        --shadow-color: rgba(0, 0, 0, 0.1); /* Softer shadow */
       }
 
+      /* --- Font Faces (Keep as is) --- */
       @font-face {
         font-family: "Architex";
         src: url("fonts/architex.ttf");
-        font-weight: normal;
-        font-style: normal;
       }
-
       @font-face {
         font-family: "Alphabetized";
         src: url("fonts/alphabetized.ttf");
-        font-weight: normal;
-        font-style: normal;
       }
-
       @font-face {
         font-family: "Allison";
         src: url("fonts/allison.otf");
-        font-weight: normal;
-        font-style: normal;
       }
-
       @font-face {
         font-family: "Rabiohead";
         src: url("fonts/rabiohead.ttf");
-        font-weight: normal;
-        font-style: normal;
+      }
+
+      html {
+        scroll-behavior: smooth; /* Smooth scrolling for anchor links if any */
       }
 
       html,
@@ -52,8 +58,8 @@
       }
 
       body {
-        font-family: "Helvetica", serif;
-        line-height: 1.8;
+        font-family: "Helvetica", sans-serif; /* Switched default to Poppins for cleaner UI feel */
+        line-height: 1.7; /* Slightly reduced line-height */
         margin: 0;
         padding: 0;
         color: var(--text-color);
@@ -64,28 +70,43 @@
         min-height: 100vh;
         display: flex;
         flex-direction: column;
+        /* Improved font rendering */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
 
       header {
         background: var(--transparent-color);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(1px);
         color: var(--primary-color);
-        padding: 1rem;
+        padding: 1rem 2rem; /* More padding */
         text-align: center;
-        max-width: 20%; /* Added max-width */
-        margin: 0 auto; /* Center the header */
+        /* Removed restrictive max-width, let margin center it */
+        margin: 0 auto;
+        position: sticky; /* Sticky header */
+        top: 0;
+        z-index: 100;
+        width: 100%; /* Ensure it spans width for sticky */
+        box-sizing: border-box; /* Include padding in width */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Subtle shadow */
       }
 
       header h1 {
-        font-family: "Allison";
-        font-size: clamp(80px, 2vw, 120px);
-        animation: fadeIn 1s ease-out;
+        font-family: "Allison", cursive; /* Keep Allison for main title */
+        font-size: clamp(60px, 10vw, 100px); /* Adjusted size */
+        margin: 0; /* Remove default margin */
+        animation: fadeInDown 1s ease-out forwards; /* Use a downward fade */
+        opacity: 0; /* Start hidden for animation */
       }
 
+      /* --- Links --- */
       a {
-        color: #0077cc;
+        color: var(--link-color);
         text-decoration: none;
         position: relative;
         transition: color 0.3s ease;
+        font-weight: 600; /* Slightly bolder links */
       }
 
       a::after {
@@ -93,16 +114,18 @@
         position: absolute;
         width: 100%;
         height: 2px;
-        bottom: 0;
+        bottom: -3px; /* Lower the underline slightly */
         left: 0;
-        background-color: #0077cc;
+        background-color: var(--link-color);
         transform: scaleX(0);
-        transform-origin: bottom right;
-        transition: transform 0.3s ease;
+        transform-origin: bottom left; /* Change origin for smoother feel */
+        transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother ease */
       }
 
-      a:hover {
-        color: #005fa3;
+      a:hover,
+      a:focus {
+        color: var(--link-hover-color);
+        outline: none; /* Remove focus outline if needed */
       }
 
       a:hover::after {
@@ -110,117 +133,166 @@
         transform-origin: bottom left;
       }
 
-      /* Specific styles for navigation links */
-      nav a {
-        color: #333;
-        font-weight: bold;
-        padding: 5px 10px;
-        border-radius: 5px;
-        transition: background-color 0.3s ease, color 0.3s ease;
+      /* Specific styles for navigation/post title links */
+      nav a,
+      .blog-post h2 a {
+        color: var(--primary-color); /* Use primary color */
+        font-weight: bold; /* Keep bold */
+        transition: color 0.3s ease, transform 0.3s ease; /* Add transform transition */
+        display: inline-block; /* Needed for transform */
       }
 
-      nav a:hover {
-        background-color: #0077cc;
-        color: #fff;
+      nav a:hover,
+      .blog-post h2 a:hover,
+      nav a:focus,
+      .blog-post h2 a:focus {
+        color: var(--link-hover-color); /* Use link hover color */
+        background-color: transparent; /* No background change */
+        transform: translateY(-2px); /* Subtle lift on hover */
       }
 
-      nav a::after {
+      /* Remove underline effect for post titles and nav */
+      nav a::after,
+      .blog-post h2 a::after {
         display: none;
       }
 
+      /* --- Container --- */
       .container {
-        width: 80%;
-        max-width: 800px;
-        margin: 2rem auto;
-        overflow: hidden;
-        flex: 1 0 auto;
+        width: 90%; /* Wider for responsiveness */
+        max-width: 850px; /* Slightly larger max */
+        margin: 3rem auto; /* More top/bottom margin */
+        overflow: visible; /* Allow shadows/transforms to peek out */
+        flex: 1 0 auto; /* For sticky footer */
       }
 
-      .container h2 {
-        color: var(--primary-color);
-        margin-top: 0;
-      }
-
+      /* --- Post Date Styling --- */
       .post-date {
         position: absolute;
-        font-family: "Rabiohead";
-        top: 10px;
-        right: 10px;
-        background-color: var(--transparent-color);
-        color: rgb(19, 19, 19);
-        padding: 10px;
+        font-family: "Rabiohead", sans-serif; /* Keep Rabiohead */
+        top: 1.5rem; /* Adjust position */
+        right: 1.5rem;
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.3
+        ); /* Slightly visible background */
+        color: var(--secondary-color); /* Use secondary color */
+        padding: 8px 12px;
         border-radius: 5px;
         font-weight: bold;
-        transform: rotate(3deg);
-        transition: transform 0.3s ease;
+        transform: rotate(2deg); /* Less rotation */
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          /* Bouncy transition */ box-shadow 0.3s ease, color 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        z-index: 1; /* Ensure it's above post content */
       }
 
       .post-date:hover {
-        transform: rotate(0deg) scale(1.05);
-        color: rgb(255, 255, 15);
+        transform: rotate(-1deg) scale(1.08); /* More dynamic hover */
+        color: var(--primary-color); /* Change color */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       }
 
       .post-date .day {
         font-size: 1.5em;
         display: block;
         text-align: center;
+        line-height: 1.1;
       }
-
       .post-date .month-year {
-        font-size: 0.8em;
+        font-size: 0.75em;
         display: block;
         text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
       }
 
+      /* --- Blog Post Styling --- */
       .blog-post {
-        background: white;
-        border-radius: 8px;
-        margin-bottom: 2rem;
-        padding: 2rem;
+        position: relative; /* Needed for absolute positioned date */
         background: var(--background-color);
-        box-shadow: 0 12px 10px rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 10px; /* More rounded */
+        margin-bottom: 2.5rem; /* More space between posts */
+        padding: 2rem 2.5rem; /* More padding */
+        box-shadow: 0 4px 8px var(--shadow-color); /* Softer shadow */
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        /* Prepare for animation */
+        opacity: 0;
+        transform: translateY(30px);
+        transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+          box-shadow 0.4s ease, opacity 0.5s ease;
+      }
+
+      /* State for when element is scrolled into view */
+      .blog-post.is-visible {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       .blog-post:hover {
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Enhanced hover shadow */
+        transform: translateY(-6px); /* Lift effect on hover */
       }
 
       .blog-post h2 {
         font-family: "Rabiohead", sans-serif;
-        font-size: clamp(30px, 2vw, 50px);
+        font-size: clamp(1.8rem, 4vw, 2.5rem); /* Adjusted size */
         color: var(--primary-color);
         margin-top: 0;
+        margin-bottom: 0.75rem; /* Space below title */
+        line-height: 1.2;
       }
 
-      .blog-post h2:hover {
+      /* Remove the direct h2 hover effect, let the whole card lift */
+      /* .blog-post h2:hover {
         color: #0f3372;
         transform: rotate(1deg) scale(1.05);
-      }
+      } */
 
       .blog-post time {
-        color: #7f8c8d;
-        font-size: 0.9rem;
+        /* Style the time element if you add it */
+        display: none; /* Make it block */
+        color: #666;
+        font-size: 0.85rem;
+        margin-bottom: 1rem; /* Space below date */
+        font-family: "Poppins", sans-serif;
       }
 
+      .blog-post p {
+        margin-bottom: 0; /* Remove default bottom margin if it's the last element */
+        color: var(--text-color);
+        font-size: clamp(0.9rem, 1.5vw, 1rem);
+      }
+
+      /* --- Footer --- */
       footer {
-        font-family: "Allison";
-        font-size: clamp(10px, 2vw, 20px);
-        font-weight: bold;
+        font-family: "Allison", cursive; /* Keep Allison */
+        font-size: clamp(40px, 3vw, 60px); /* Adjusted size */
+        font-weight: bold; /* Allison is decorative, bold might be too much */
         text-align: center;
-        padding: 1rem;
+        padding: 1.5rem; /* More padding */
         background: var(--transparent-color);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(1px);
         color: var(--primary-color);
         width: 100%;
-        flex-shrink: 0;
+        flex-shrink: 0; /* For sticky footer */
+        margin-top: 3rem; /* Space above footer */
+        box-sizing: border-box;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.01); /* Subtle top shadow */
+      }
+      footer p {
+        margin: 0;
       }
 
-      @keyframes fadeIn {
+      /* --- Animations --- */
+      @keyframes fadeInDown {
         from {
           opacity: 0;
-          transform: translateY(-20px);
+          transform: translateY(-25px);
         }
         to {
           opacity: 1;
@@ -228,92 +300,52 @@
         }
       }
 
-      .blog-post {
-        animation: slideIn 0.5s ease-out forwards;
-        opacity: 0;
-      }
-
-      @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateY(-50px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
+      /* We will trigger animation using JS now, removing slideIn keyframes */
+      /* @keyframes slideIn { ... } */
     </style>
   </head>
   <body>
     <header>
-      <h1>Nat</h1>
+      <h1>© 2024 Nat. Something is not going to happen</h1>
     </header>
 
     <div class="container">
+      <!-- Added time elements for clarity -->
       <article class="blog-post">
-        <h2><a href="posts/yolo.html">YOLOV1 to V10</a></h2>
-        <div class="post-date" datetime="2024-07-15"></div>
+        <div class="post-date" datetime="2025-04-08"></div>
+        <h2><a href="posts/leif1.html">Leif Magic Series 1</a></h2>
+        <time datetime="2025-04-08">April 8, 2025</time>
         <p>
-          A discussion and explaination of YOLO model series, the single-stage
+          The first post about the Leif Magic, including some introductions of
+          basic concepts and mechanisms.
+        </p>
+      </article>
+
+      <article class="blog-post">
+        <div class="post-date" datetime="2024-07-15"></div>
+        <h2><a href="posts/yolo.html">YOLOV1 to V10</a></h2>
+        <time datetime="2024-07-15">July 15, 2024</time>
+        <p>
+          A discussion and explanation of YOLO model series, the single-stage
           object detector family.
         </p>
       </article>
 
       <article class="blog-post">
-        <h2><a href="posts/post.html">The Art of Web Design</a></h2>
         <div class="post-date" datetime="2024-07-16"></div>
+        <h2><a href="posts/post.html">The Art of Web Design</a></h2>
+        <time datetime="2024-07-16">July 16, 2024</time>
         <p>
           Today, we'll dive into the principles of modern web design and how to
           create visually appealing and user-friendly websites.
         </p>
       </article>
+      <!-- Add more posts as needed -->
     </div>
 
-    <footer>
-      <p>&copy; 2024 Nat. Something is not going to happen</p>
-    </footer>
-
-    <!-- <script>
-      function setTheme() {
-        const now = new Date();
-        const hours = now.getHours();
-        const minutes = now.getMinutes();
-        const totalMinutes = hours * 60 + minutes;
-
-        // Calculate hue based on time (0-360 degrees)
-        const hue = (totalMinutes / 1440) * 360;
-
-        // Calculate lightness (darker at night, lighter during the day)
-        const lightness = Math.sin((totalMinutes / 1440) * Math.PI) * 20 + 70;
-
-        // Primary color
-        const primaryColor = `hsl(${hue}, 70%, 45%)`;
-
-        // Background color (very light version of primary color)
-        const backgroundColor = `hsl(${hue}, 70%, 95%)`;
-
-        // Text color (dark version of primary color)
-        const textColor = `hsl(${hue}, 70%, 20%)`;
-
-        document.documentElement.style.setProperty(
-          "--primary-color",
-          primaryColor
-        );
-        document.documentElement.style.setProperty("--text-color", textColor);
-      }
-
-      // Set the initial theme
-      setTheme();
-
-      // Update the theme every minute
-      setInterval(setTheme, 5000);
-    </script> -->
-
+    <!-- Scripts -->
     <script>
-      // ... your existing JavaScript ...
-
-      // Function to format the date
+      // --- Date Formatting (Keep as is) ---
       function formatDate(date) {
         const day = date.getDate();
         const month = date.toLocaleString("default", { month: "short" });
@@ -321,19 +353,80 @@
         return `<span class="day">${day}</span><span class="month-year">${month} ${year}</span>`;
       }
 
-      // Update all post dates
       function updatePostDates() {
         const postDates = document.querySelectorAll(".post-date");
         postDates.forEach((dateElement) => {
-          const date = new Date(
-            dateElement.getAttribute("datetime") || Date.now()
-          );
-          dateElement.innerHTML = formatDate(date);
+          const dateAttr = dateElement.getAttribute("datetime");
+          if (dateAttr) {
+            try {
+              const date = new Date(dateAttr);
+              dateElement.innerHTML = formatDate(date);
+            } catch (e) {
+              console.error("Invalid date format:", dateAttr);
+              // Optionally set default text
+              // dateElement.innerHTML = "Invalid Date";
+            }
+          } else {
+            // Handle case where datetime attribute is missing
+            console.warn("Missing datetime attribute for post-date element.");
+          }
         });
       }
-
-      // Call the function to update dates
       updatePostDates();
+
+      // --- Dynamic Effects ---
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- Option 1: Staggered Animation on Load (Simpler) ---
+        /*
+        const blogPosts = document.querySelectorAll('.blog-post');
+        blogPosts.forEach((post, index) => {
+          setTimeout(() => {
+            post.style.opacity = '1';
+            post.style.transform = 'translateY(0)';
+          }, index * 150); // 150ms delay between each post
+        });
+        */
+
+        // --- Option 2: Animation on Scroll (More Dynamic) ---
+        const blogPosts = document.querySelectorAll(".blog-post");
+
+        if ("IntersectionObserver" in window) {
+          const observer = new IntersectionObserver(
+            (entries, observer) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-visible");
+                  observer.unobserve(entry.target); // Optional: stop observing once visible
+                }
+              });
+            },
+            {
+              rootMargin: "0px", // No margin
+              threshold: 0.1, // Trigger when 10% of the element is visible
+            }
+          );
+
+          blogPosts.forEach((post) => {
+            observer.observe(post);
+          });
+        } else {
+          // Fallback for older browsers (make all visible immediately)
+          blogPosts.forEach((post) => {
+            post.classList.add("is-visible");
+          });
+          console.warn(
+            "IntersectionObserver not supported, showing all posts immediately."
+          );
+        }
+      });
     </script>
+    <!-- Theme Changer Script (Optional - Uncomment if desired) -->
+    <!--
+     <script>
+       function setTheme() { // ... (your theme changer code) }
+       setTheme();
+       setInterval(setTheme, 60000); // Update every minute
+     </script>
+     -->
   </body>
 </html>
