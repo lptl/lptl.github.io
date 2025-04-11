@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nat - Post with Comments</title>
+
+    <!-- MathJax Configuration -->
+    <script>
+      /* ... Keep MathJax Config ... */
+    </script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+    ></script>
+
+    <!-- Marked.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Merriweather:wght@300;400;700&display=swap");
+
+      /* --- Theme Variables --- */
+      :root {
+        /* ... other font vars ... */
+        --primary-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        --title-font: "Rabiohead", sans-serif;
+        --decorative-font: "Allison", cursive;
+        --secondary-font: "Poppins", sans-serif;
+
+        /* Color Variables */
+        --primary-accent-fallback: #007aff; /* Fallback iOS Blue */
+        --primary-accent: var(
+          --primary-accent-fallback
+        ); /* Default to fallback */
+        --secondary-text: rgba(60, 60, 67, 0.65);
+        --primary-text: rgb(40, 40, 42);
+        --separator-color: rgba(60, 60, 67, 0.2);
+        --container-background-rgb: 248, 248, 250;
+        --container-background: rgba(var(--container-background-rgb), 0.6);
+        --input-background: rgba(118, 118, 128, 0.12);
+        --shadow-color: rgba(0, 0, 0, 0.08);
+        --link-color: var(--primary-accent); /* Use the dynamic variable */
+        --link-hover-color: #005ec4; /* Needs dynamic calc or fixed */
+        --container-radius: 14px;
+        --element-radius: 7px;
+        --blur-amount: 20px;
+        --saturate-amount: 150%;
+        --code-bg: rgba(118, 118, 128, 0.08);
+        --code-text: #333;
+        --code-border: rgba(60, 60, 67, 0.15);
+        --secondary-color: #2c3e50;
+      }
+
+      /* --- Font Faces --- */
+      /* ... Keep Font Faces ... */
+      @font-face {
+        font-family: "Architex";
+        src: url("../fonts/architex.ttf");
+      }
+      @font-face {
+        font-family: "Alphabetized";
+        src: url("../fonts/alphabetized.ttf");
+      }
+      @font-face {
+        font-family: "Allison";
+        src: url("../fonts/allison.otf");
+      }
+      @font-face {
+        font-family: "Rabiohead";
+        src: url("../fonts/rabiohead.ttf");
+      }
+
+      @font-face {
+        font-family: "Andale";
+        src: url("../fonts/andale.ttf");
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: var(--primary-font);
+        line-height: 1.6;
+        font-size: 16px;
+        margin: 0;
+        padding: 0;
+        color: var(--primary-text);
+        /* IMPORTANT: Ensure this background image path is correct */
+        background-image: url("../images/aurora.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* --- Main Container Styling (FOR POST) --- */
+      .container {
+        width: 90%;
+        max-width: 760px;
+        margin: 3rem auto 0 auto;
+        background: var(--container-background);
+        padding: 2rem clamp(1.5rem, 4vw, 2.5rem);
+        border-radius: var(--container-radius);
+        box-shadow: 0 6px 20px var(--shadow-color);
+        backdrop-filter: blur(var(--blur-amount))
+          saturate(var(--saturate-amount));
+        -webkit-backdrop-filter: blur(var(--blur-amount))
+          saturate(var(--saturate-amount));
+        border: 1px solid rgba(0, 0, 0, 0.06);
+      }
+
+      /* --- Post Specific Styling --- */
+      .post-header {
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--separator-color);
+      }
+      .post-title {
+        color: var(--secondary-color);
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
+        margin-bottom: 0.5rem;
+        font-family: var(--title-font);
+        line-height: 1.2;
+      }
+      .post-meta {
+        color: var(--secondary-text);
+        font-size: 0.85rem;
+        margin-bottom: 0;
+      }
+      .post-meta time {
+        font-weight: 500;
+      }
+      .post-meta span[style*="Allison"] {
+        font-family: var(--decorative-font) !important;
+        font-weight: normal;
+        font-size: 1.3em;
+        color: var(--primary-text);
+        margin-left: 2px;
+      }
+      .post-content {
+        margin-top: 2rem;
+      }
+      .post-content p,
+      .post-content ul,
+      .post-content ol,
+      .post-content blockquote {
+        margin-bottom: 1.25em;
+        font-size: 1.05em;
+        line-height: 1.7;
+      }
+      .post-content ul,
+      .post-content ol {
+        padding-left: 1.8em;
+      }
+      .post-content li {
+        margin-bottom: 0.5em;
+      }
+      .post-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: var(--element-radius);
+        margin: 1.5rem auto;
+        display: block;
+      }
+      .post-content h1,
+      .post-content h2,
+      .post-content h3,
+      .post-content h4 {
+        font-family: var(--secondary-font);
+        color: var(--primary-text);
+        margin: 2em 0 1em 0;
+        font-weight: 600;
+        line-height: 1.3;
+      }
+      .post-content h3 {
+        font-size: 1.4em;
+        border-bottom: 1px solid var(--separator-color);
+        padding-bottom: 0.3em;
+      }
+      .post-content h4 {
+        font-size: 1.2em;
+        font-weight: 500;
+      }
+      .post-content code {
+        background-color: var(--code-bg);
+        padding: 0.2em 0.4em;
+        margin: 0 0.1em;
+        font-size: 88%;
+        border-radius: 4px;
+        font-family: Andale, Menlo;
+        color: var(--code-text);
+        border: 1px solid var(--code-border);
+      }
+      .post-content pre {
+        background-color: var(--code-bg);
+        border: 1px solid var(--code-border);
+        color: var(--code-text);
+        font-family: Andale, Menlo;
+        font-size: 0.9em;
+        line-height: 1.6;
+        margin: 1.5em 0;
+        max-width: 100%;
+        overflow: auto;
+        padding: 1em 1.2em;
+        display: block;
+        border-radius: var(--element-radius);
+      }
+      .post-content pre code {
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+        font-size: inherit;
+        border-radius: 0;
+        color: inherit;
+        border: none;
+      }
+      .mathjax-rendered .MathJax,
+      .mathjax-rendered .MJX-TEX,
+      .mathjax-rendered .mjx-i,
+      .mathjax-rendered mjx-container[jax="CHTML"][display="true"] {
+        font-style: normal !important;
+      }
+
+      /* --- Links Use Dynamic Color --- */
+      .back-link {
+        display: inline-block;
+        margin-top: 2.5rem;
+        color: var(--link-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+      .back-link:hover {
+        color: var(--link-hover-color); /* Consider setting dynamically too */
+        text-decoration: underline;
+      }
+      .back-link::after {
+        display: none;
+      }
+
+      /* --- Comments Section Styling (SEPARATE BLOCK) --- */
+      #comments-section {
+        width: 90%;
+        max-width: 760px;
+        margin: 2rem auto 3rem auto;
+        background: var(--container-background);
+        padding: 1.5rem clamp(1.5rem, 4vw, 2rem);
+        border-radius: var(--container-radius);
+        box-shadow: 0 6px 20px var(--shadow-color);
+        backdrop-filter: blur(var(--blur-amount))
+          saturate(var(--saturate-amount));
+        -webkit-backdrop-filter: blur(var(--blur-amount))
+          saturate(var(--saturate-amount));
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        font-family: var(--primary-font);
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--primary-text);
+      }
+
+      .comments-separator {
+        border: 0;
+        height: 1px;
+        background-color: var(--separator-color);
+        margin: 0 auto 1.5rem auto;
+        width: 95%;
+      }
+      #comments-section h3 {
+        font-size: 1.2rem;
+        color: var(--primary-text);
+        margin-bottom: 1.5rem;
+        font-family: inherit;
+        font-weight: 600;
+        padding: 0;
+      }
+      #comments-list {
+        margin-bottom: 2rem;
+      }
+      .comment {
+        margin-bottom: 1.5rem;
+        padding: 0 0 1.5rem 0;
+        border: none;
+        border-bottom: 1px solid var(--separator-color);
+      }
+      .comment:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+      .comment-meta {
+        font-size: 0.85em;
+        color: var(--secondary-text);
+        margin-bottom: 0.5rem;
+      }
+      .comment-meta .author {
+        font-weight: 600;
+        color: var(--primary-text);
+      }
+      .comment-meta .timestamp {
+        margin-left: 8px;
+      }
+      .comment-text {
+        overflow-wrap: break-word;
+        color: var(--primary-text);
+      }
+      .comment-text p {
+        margin: 0 0 0.75em 0;
+        font-size: inherit;
+        line-height: inherit;
+      }
+      #comments-section code {
+        background-color: var(--code-bg);
+        padding: 0.2em 0.4em;
+        margin: 0 0.1em;
+        font-size: 90%;
+        border-radius: 4px;
+        font-family: Andale, Menlo;
+        color: var(--code-text);
+        border: 1px solid var(--code-border);
+      }
+      #comments-section pre {
+        background-color: var(--code-bg);
+        border: 1px solid var(--code-border);
+        color: var(--code-text);
+        font-family: Andale, Menlo;
+        font-size: 0.85em;
+        line-height: 1.6;
+        margin: 1em 0;
+        max-width: 100%;
+        overflow: auto;
+        padding: 0.8em 1em;
+        display: block;
+        border-radius: var(--element-radius);
+      }
+      #comments-section pre code {
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+        font-size: inherit;
+        border-radius: 0;
+        color: inherit;
+        border: none;
+      }
+
+      /* --- Comment Form Uses Dynamic Color --- */
+      #comment-form {
+        margin-top: 1.5rem;
+        border-top: 1px solid var(--separator-color);
+        padding-top: 1.5rem;
+      }
+      .form-row {
+        margin-bottom: 0.75rem;
+      }
+      .form-row label {
+        display: block;
+        font-size: 0.85em;
+        font-weight: 500;
+        color: var(--secondary-text);
+        margin-bottom: 4px;
+      }
+      #comment-form input[type="text"],
+      #comment-form input[type="email"],
+      #comment-form textarea {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 12px;
+        border: 1px solid var(--separator-color);
+        border-radius: var(--element-radius);
+        font-family: inherit;
+        font-size: 1em;
+        background-color: var(--input-background);
+        color: var(--primary-text);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+      #comment-form input[type="text"]:focus,
+      #comment-form input[type="email"]:focus,
+      #comment-form textarea:focus {
+        outline: none;
+        border-color: var(--primary-accent);
+        box-shadow: 0 0 0 2px
+          color-mix(in srgb, var(--primary-accent) 20%, transparent);
+      } /* Dynamic focus ring */
+      #comment-form textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+      #comment-form button {
+        padding: 10px 20px;
+        background-color: var(--primary-accent); /* Use dynamic accent */
+        border: none;
+        border-radius: var(--element-radius);
+        color: white;
+        font-family: inherit;
+        font-size: 0.95em;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.1s ease,
+          filter 0.2s ease; /* Added filter */
+        -webkit-appearance: none;
+        margin-top: 0.5rem;
+      }
+      #comment-form button:hover {
+        /* background-color: var(--link-hover-color); Need dynamic hover */
+        filter: brightness(0.9); /* Darken slightly on hover */
+      }
+      #comment-form button:active {
+        transform: scale(0.97);
+        filter: brightness(0.8);
+      }
+
+      /* Footer Styling */
+      footer {
+        font-family: var(--primary-font);
+        font-size: 0.8rem;
+        text-align: center;
+        padding: 1rem;
+        color: var(--secondary-text);
+        width: 100%;
+        flex-shrink: 0;
+        margin-top: auto;
+      }
+      footer p {
+        font-family: var(--decorative-font);
+        font-size: clamp(16px, 2.5vw, 20px);
+        color: var(--primary-text);
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Main Post Container -->
+    <div class="container">
+      <article class="post">
+        <div class="post-header">
+          <h2 class="post-title">Shopping List</h2>
+          <div class="post-meta">
+            <span
+              >Published on
+              <time datetime="2025-04-08">Apr 08, 2025</time></span
+            >
+            <span> by </span
+            ><span style="font-family: 'Allison'; font-weight: bold">Nat</span>
+          </div>
+        </div>
+        <div class="post-content" id="markdown-render-area">
+          <p>Loading content...</p>
+        </div>
+        <textarea id="markdown-source" style="display: none">
+Shopping list:
+- tofu
+- ginger
+- egg
+- coke
+- some cheap fruit like grapes
+- one box ramen if it is on discount otherwise don't buy it
+- minced beef but it is too expensive so please don't buy it
+- some fresh chicken wings or legs, they are cheap
+- some Choi
+        </textarea>
+      </article>
+      <br />
+      <a href="../index.html" class="back-link">← Back to Blog</a>
+    </div>
+    <!-- End Main .container -->
+
+    <!-- Comments Section - SEPARATE from main container -->
+    <section id="comments-section">
+      <hr class="comments-separator" />
+      <h3>Comments (<span id="comment-count">0</span>)</h3>
+      <div id="comments-list"><!-- Comments will be loaded here --></div>
+      <form id="comment-form">
+        <div class="form-row">
+          <label for="comment-author">Name</label>
+          <input
+            type="text"
+            id="comment-author"
+            placeholder="Your Name"
+            required
+          />
+        </div>
+        <div class="form-row">
+          <label for="comment-email">Email (Optional, Not Shown)</label>
+          <input type="email" id="comment-email" placeholder="your@email.com" />
+        </div>
+        <div class="form-row">
+          <label for="comment-text">Comment</label>
+          <textarea
+            id="comment-text"
+            placeholder="Add a comment (Markdown supported)..."
+            required
+            rows="4"
+          ></textarea>
+        </div>
+        <button type="submit">Add Comment</button>
+      </form>
+    </section>
+    <!-- End Comments Section -->
+
+    <footer>
+      <p>© 2024 Nat. Locn Magic Series 1</p>
+    </footer>
+
+    <script>
+      // --- Helper Functions ---
+      function updateCommentCount(count) {
+        const span = document.getElementById("comment-count");
+        if (span) span.textContent = count;
+      }
+      function formatTimestamp(timestamp) {
+        const date = new Date(timestamp);
+        const now = new Date();
+        const diffSeconds = Math.round((now - date) / 1000);
+        const diffMinutes = Math.round(diffSeconds / 60);
+        const diffHours = Math.round(diffMinutes / 60);
+        const diffDays = Math.round(diffHours / 24);
+        if (diffSeconds < 60) return `${diffSeconds}s ago`;
+        if (diffMinutes < 60) return `${diffMinutes}m ago`;
+        if (diffHours < 24) return `${diffHours}h ago`;
+        if (diffDays === 1) return `yesterday`;
+        if (diffDays < 7) return `${diffDays}d ago`;
+        return date.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+        });
+      }
+      function triggerMathJax(element) {
+        if (
+          typeof MathJax !== "undefined" &&
+          MathJax.typesetPromise &&
+          element
+        ) {
+          MathJax.typesetPromise([element]).catch((err) =>
+            console.error("MathJax Err:", err)
+          );
+        }
+      }
+
+      // --- Main DOMContentLoaded Listener ---
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("DOM loaded.");
+
+        // --- Function to set accent color from background ---
+        function setAccentColorFromBackground() {
+          console.log("Attempting to set accent color...");
+          const bodyStyles = window.getComputedStyle(document.body);
+          const bgImageStyle = bodyStyles.backgroundImage;
+
+          // Extract URL from 'url("...")' string
+          const urlMatch = bgImageStyle.match(/url\("?([^"]+)"?\)/);
+          if (!urlMatch || !urlMatch[1]) {
+            console.warn("Could not extract background image URL from CSS.");
+            return; // Use fallback color
+          }
+          const imageUrl = urlMatch[1];
+          console.log("Background image URL:", imageUrl);
+
+          const img = new Image();
+          // IMPORTANT: Set crossOrigin *before* src for potential CORS requests
+          img.crossOrigin = "Anonymous";
+
+          img.onload = function () {
+            console.log("Background image loaded successfully.");
+            const canvas = document.createElement("canvas");
+            // Smaller canvas for performance - adjust as needed
+            const W = 50;
+            const H = 50;
+            canvas.width = W;
+            canvas.height = H;
+            const ctx = canvas.getContext("2d", { willReadFrequently: true }); // Hint for optimization
+
+            // Draw potentially scaled image
+            ctx.drawImage(img, 0, 0, W, H);
+
+            let data;
+            try {
+              data = ctx.getImageData(0, 0, W, H).data;
+            } catch (e) {
+              console.error("Error getting image data (likely CORS issue):", e);
+              console.warn(
+                "Falling back to default accent color due to error."
+              );
+              // No need to set variable here, it defaults to fallback
+              return;
+            }
+
+            let r = 0,
+              g = 0,
+              b = 0;
+            let pixelCount = 0;
+            // Sample pixels (e.g., every 5th pixel) for performance
+            const sampleRate = 5;
+            for (let i = 0; i < data.length; i += 4 * sampleRate) {
+              // Optional: Add check for alpha > threshold if needed
+              // if (data[i + 3] > 128) { // Only sample opaque pixels
+              r += data[i];
+              g += data[i + 1];
+              b += data[i + 2];
+              pixelCount++;
+              // }
+            }
+
+            if (pixelCount === 0) {
+              console.warn(
+                "No pixels sampled (image might be transparent or empty). Falling back."
+              );
+              return;
+            }
+
+            const avgR = Math.round(r / pixelCount);
+            const avgG = Math.round(g / pixelCount);
+            const avgB = Math.round(b / pixelCount);
+
+            const avgColor = `rgb(${avgR}, ${avgG}, ${avgB})`;
+            console.log("Calculated Average Color:", avgColor);
+
+            // Set the CSS variable
+            document.documentElement.style.setProperty(
+              "--primary-accent",
+              avgColor
+            );
+            console.log("--primary-accent set to calculated color.");
+
+            // Optional: Calculate and set a hover color (e.g., slightly darker)
+            // This is a basic darkening effect, might need tweaking
+            const darkerR = Math.max(0, avgR - 30);
+            const darkerG = Math.max(0, avgG - 30);
+            const darkerB = Math.max(0, avgB - 30);
+            const hoverColor = `rgb(${darkerR}, ${darkerG}, ${darkerB})`;
+            document.documentElement.style.setProperty(
+              "--link-hover-color",
+              hoverColor
+            );
+          };
+
+          img.onerror = function () {
+            console.error("Error loading background image. Check path/URL.");
+            console.warn("Falling back to default accent color.");
+            // No need to set variable here, it defaults to fallback
+          };
+
+          img.src = imageUrl; // Start loading the image
+        }
+
+        // Run the color extraction function
+        setAccentColorFromBackground();
+
+        // --- Markdown Rendering ---
+        const markdownSourceElement =
+          document.getElementById("markdown-source");
+        const renderAreaElement = document.getElementById(
+          "markdown-render-area"
+        );
+        // ... other console logs ...
+
+        if (
+          markdownSourceElement &&
+          renderAreaElement &&
+          typeof marked !== "undefined"
+        ) {
+          console.log("Setup OK: Elements found and marked library loaded.");
+          try {
+            // Configure marked
+            marked.setOptions({
+              breaks: false, // <<< SET TO FALSE
+              gfm: true, // Keep gfm: true for other features like tables, etc.
+            });
+            const markdownText = markdownSourceElement.value;
+            console.log(`Markdown Text read (length: ${markdownText.length})`);
+
+            if (!markdownText) {
+              console.warn("Markdown source textarea is empty!");
+            }
+
+            const htmlContent = marked.parse(markdownText); // Parse Markdown
+            console.log("Markdown parsed successfully.");
+
+            renderAreaElement.innerHTML = htmlContent; // Render HTML
+            console.log("SUCCESS: renderAreaElement.innerHTML updated.");
+
+            console.log("Queueing MathJax for main content...");
+            setTimeout(() => triggerMathJax(renderAreaElement), 100);
+          } catch (error) {
+            console.error("ERROR during Markdown parsing or rendering:", error);
+            if (renderAreaElement)
+              renderAreaElement.innerHTML = `<p style="color: red; font-weight: bold;">Error rendering content: ${error.message}</p>`;
+          }
+        } else {
+          console.error(
+            "Markdown Rendering Setup FAILED. Reasons logged above."
+          );
+          if (renderAreaElement)
+            renderAreaElement.innerHTML =
+              "<p>Error loading content - initial setup failed.</p>";
+        }
+
+        // --- Comments Functionality ---
+        const commentsList = document.getElementById("comments-list");
+        const commentForm = document.getElementById("comment-form");
+        /* ... other comment variables ... */
+        const storageKey = `comments_${window.location.pathname}`;
+
+        function loadComments() {
+          /* ... implementation ... */
+        }
+        function renderComment(comment) {
+          /* ... implementation ... */
+        }
+        if (commentForm) {
+          commentForm.addEventListener("submit", function (event) {
+            /* ... implementation ... */
+          });
+        } else {
+          console.error("Comment form not found!");
+        }
+
+        loadComments(); // Initial load
+        // --- End Comments Functionality ---
+      }); // End DOMContentLoaded Listener
+
+      // --- Full Comment Function Implementations (ensure they are defined) ---
+      function loadComments() {
+        const commentsList = document.getElementById("comments-list");
+        const storageKey = `comments_${window.location.pathname}`;
+        if (!commentsList) {
+          console.error("Comments list element not found during load.");
+          return;
+        }
+        const storedComments = localStorage.getItem(storageKey);
+        const comments = storedComments ? JSON.parse(storedComments) : [];
+        commentsList.innerHTML = "";
+        comments.forEach((comment) => renderComment(comment)); // Needs renderComment
+        updateCommentCount(comments.length); // Needs updateCommentCount
+      }
+
+      function renderComment(comment) {
+        const commentsList = document.getElementById("comments-list");
+        if (!commentsList) return;
+
+        const commentDiv = document.createElement("div");
+        commentDiv.className = "comment";
+        const metaDiv = document.createElement("div");
+        metaDiv.className = "comment-meta";
+        const authorSpan = document.createElement("span");
+        authorSpan.className = "author";
+        authorSpan.textContent =
+          comment.author && comment.author.trim() !== ""
+            ? comment.author
+            : "Anonymous";
+        const timestampSpan = document.createElement("span");
+        timestampSpan.className = "timestamp";
+        timestampSpan.textContent = formatTimestamp(comment.timestamp); // Needs formatTimestamp
+        metaDiv.appendChild(authorSpan);
+        metaDiv.appendChild(timestampSpan);
+
+        const textDiv = document.createElement("div");
+        textDiv.className = "comment-text";
+        if (typeof marked !== "undefined") {
+          const potentiallyUnsafe = /<script[\s\S]*?>[\s\S]*?<\/script>/gi;
+          let cleanedText = (comment.text || "").replace(potentiallyUnsafe, "");
+          textDiv.innerHTML = marked.parse(cleanedText);
+        } else {
+          textDiv.textContent = comment.text || "";
+        }
+
+        commentDiv.appendChild(metaDiv);
+        commentDiv.appendChild(textDiv);
+        commentsList.appendChild(commentDiv);
+
+        if (
+          comment.text &&
+          comment.text.match(/(\$|\\\(|\\\[).+(\$|\\\)|\\\])/)
+        ) {
+          setTimeout(() => triggerMathJax(textDiv), 150); // Needs triggerMathJax
+        }
+      }
+
+      // Submit handler needs to be inside the DOMContentLoaded or called from there
+      // The event listener addition itself *is* inside DOMContentLoaded, which is correct.
+    </script>
+  </body>
+</html>
