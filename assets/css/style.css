@@ -1,100 +1,138 @@
 /* =================================================================
-   1. Typography & Background (Vintage Paper + Klein Blue)
+   1. Typography & Background (Dark Academia / Noir)
    ================================================================= */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
-
 :root {
-    /* 核心配色：青花瓷风格 */
-    --paper-bg: #f4f1ea;       /* 米色纸张背景 */
-    --card-bg: #ffffff;        /* 卡片纯白背景 */
-    --ink-color: #2b2b2b;      /* 深灰色文字（比之前的咖啡色更冷一点，适配蓝色） */
+    /* Color Palette: "Nocturnal Journal" */
     
-    /* 重点修改：克莱因蓝 */
-    --accent-color: #002FA7;   
+    /* Background: Deep Charcoal, almost black */
+    --paper-bg: #121212;
     
-    --border-color: #d8d2c0;   /* 浅褐色边框 */
-    --shadow-color: #d1c8b4;   /* 硬阴影颜色 */
+    /* Card: Slightly lighter dark grey */
+    --card-bg: #1e1e1e;
+    
+    /* Text: Antique Silver / Bone White (easier on eyes than pure white) */
+    --ink-color: #d4d0c7;
+    
+    /* Accent: "Electric Klein" (Brighter blue to pop on dark bg) */
+    --accent-color: #2b60ff;   
+    
+    /* Borders: Dark Grey */
+    --border-color: #333333;
+    
+    /* Shadow: Pure Black for depth */
+    --shadow-color: #000000;
 }
 
 body {
     margin: 0;
     padding: 40px 20px;
-    font-family: 'Lora', 'Georgia', serif;
+    /* Times New Roman Only */
+    font-family: "Times New Roman", Times, serif; 
     color: var(--ink-color);
     background-color: var(--paper-bg);
-    /* 纸张纹理 */
-    background-image: 
-        radial-gradient(#d8d2c0 1px, transparent 1px);
-    background-size: 20px 20px;
     min-height: 100vh;
     line-height: 1.6;
+    font-size: 19px;
+    
+    /* Subtle Grain Texture for the dark background */
+    background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
 }
 
-/* 链接样式 */
+/* Links: High contrast blue */
 a {
     color: var(--accent-color);
     text-decoration: none;
     border-bottom: 1px solid transparent;
-    transition: border-color 0.3s;
+    transition: all 0.2s ease;
 }
 a:hover {
-    border-bottom: 1px solid var(--accent-color);
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    text-shadow: 0 0 5px var(--accent-color); /* Glowing effect */
 }
 
-/* 代码块 */
+/* Code: Dark terminal style */
 pre, code {
-    font-family: "Courier New", Courier, monospace;
-    background-color: #e8e4d9; 
-    border: 1px solid #dcd6c5;
-    border-radius: 2px;
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    background-color: #000; /* Pitch black background for code */
+    border: 1px solid var(--border-color);
     padding: 2px 5px;
-    color: #001f6b; /* 代码文字也稍微带点深蓝，呼应主题 */
+    color: #8daaff; /* Pastel blue for code text */
 }
 pre {
     padding: 1.5em;
     overflow-x: auto;
-    border-left: 4px solid var(--accent-color); /* 蓝色的左边框 */
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent-color);
+    box-shadow: inset 0 0 20px #000;
 }
 
 /* =================================================================
-   2. Layout & Header
+   2. Layout & Header (The "Night Edition")
    ================================================================= */
 .site-header {
     text-align: center;
-    margin-bottom: 60px;
-    padding-bottom: 20px;
-    border-bottom: 3px double var(--border-color);
+    margin-bottom: 70px;
+    padding-bottom: 30px;
+    border-bottom: 4px double var(--border-color);
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+}
+
+.site-header::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--border-color);
+    margin-bottom: 5px;
 }
 
 .site-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.2em;
-    font-weight: 700;
-    color: var(--accent-color); /* 标题直接使用克莱因蓝 */
-    letter-spacing: 1px;
+    font-size: 3.8em;
+    font-weight: normal;
+    color: var(--ink-color); /* White title */
+    letter-spacing: 2px;
     text-transform: uppercase;
-    text-shadow: 2px 2px 0px rgba(0,0,0,0.1); /* 柔和阴影 */
+    margin: 0;
+    line-height: 1;
+    /* Subtle blue glow instead of hard shadow */
+    text-shadow: 0 0 20px rgba(43, 96, 255, 0.4); 
+}
+
+.site-title::after {
+    content: " \2014  Night Vol. I  \2014 ";
+    display: block;
+    font-size: 0.3em;
+    color: var(--accent-color); /* Blue subtitle */
+    margin-top: 15px;
+    letter-spacing: 4px;
+    font-variant: small-caps;
 }
 
 .main-content-wrapper {
-    max-width: 800px;
+    max-width: 780px;
     margin: 0 auto;
-    padding: 2em;
+    padding: 10px;
 }
 
 .main-content-wrapper img {
     max-width: 100%;
-    border: 5px solid #fff;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-    margin-top: 1em;
-    border-radius: 2px;
+    border: 1px solid #444;
+    padding: 5px;
+    background: #000; /* Black matte for images */
+    box-shadow: 8px 8px 0px var(--shadow-color);
+    margin-top: 1.5em;
+    filter: sepia(20%) contrast(1.1); /* Slight vintage photo filter */
 }
 
 /* =================================================================
-   3. Post List (Index Cards Style)
+   3. Post List (The "Archive" Look)
    ================================================================= */
 .post-list-container {
     width: 100%;
@@ -104,73 +142,63 @@ pre {
 
 .post-entry-link {
     display: block;
-    margin-bottom: 25px;
+    margin-bottom: 35px;
     color: inherit !important;
     text-decoration: none !important;
-    border: none !important;
 }
 
 .post-entry-box {
     background-color: var(--card-bg);
-    padding: 25px 30px;
+    padding: 25px 20px;
     border: 1px solid var(--border-color);
-    border-radius: 2px;
-    box-shadow: 5px 5px 0px var(--shadow-color); /* 默认土黄色阴影 */
+    /* Hard black shadow */
+    box-shadow: 5px 5px 0px #000; 
     
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    align-items: baseline;
+    transition: all 0.2s;
 }
 
-/* 悬停效果 */
+/* Hover Effects */
 .post-entry-link:hover .post-entry-box {
     transform: translate(-2px, -2px);
-    /* 悬停时，阴影变成半透明的克莱因蓝 */
-    box-shadow: 7px 7px 0px rgba(0, 47, 167, 0.2); 
+    box-shadow: 7px 7px 0px var(--accent-color); /* Blue shadow on hover */
     border-color: var(--accent-color);
+    background-color: #252525;
 }
 
 .post-details { flex-grow: 1; }
 
 .post-title {
-    font-family: 'Playfair Display', serif;
-    margin: 0 0 8px 0;
-    font-size: 1.5em;
-    font-weight: 700;
-    color: var(--ink-color);
-    transition: color 0.2s;
+    margin: 0 0 10px 0;
+    font-size: 1.8em;
+    font-weight: normal;
+    color: #fff;
+    font-style: normal;
 }
-/* 悬停时标题也变蓝 */
+
 .post-entry-link:hover .post-title {
     color: var(--accent-color);
 }
 
 .post-meta {
-    font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 0.95em;
-    color: #665c52;
-}
-.post-meta span:not(:last-child)::after {
-    content: " • ";
-    color: #ccc;
+    font-size: 1em;
+    color: #888; /* Dim grey for metadata */
+    font-variant: small-caps;
+    letter-spacing: 1px;
 }
 
 .post-type {
-    font-family: 'Courier New', monospace;
-    font-size: 0.85em;
+    font-size: 0.75em;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    
-    /* 标签颜色 */
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-    background-color: #f0f4ff; /* 极淡的蓝色背景 */
-    
-    padding: 4px 8px;
-    border-radius: 2px;
+    letter-spacing: 2px;
+    color: #000;
+    background-color: var(--accent-color); /* Blue pill */
+    padding: 2px 8px;
     margin-left: 20px;
+    border: 1px solid var(--accent-color);
+    font-weight: bold;
     white-space: nowrap;
 }
 
@@ -180,33 +208,34 @@ pre {
 .site-footer {
     text-align: center;
     padding: 60px 20px;
-    margin-top: 60px;
-    border-top: 1px dashed #ccc;
+    margin-top: 80px;
+    border-top: 4px double var(--border-color);
 }
 
 .site-description {
-    font-family: 'Lora', serif;
     font-style: italic;
-    color: #5e5044;
+    color: #666;
+    font-size: 1.1em;
 }
 
 /* Search Box */
 .search-container {
     width: 60%;
-    margin: 20px auto;
+    margin: 30px auto;
     position: relative;
 }
 
 #search-input {
     width: 100%;
-    padding: 12px 10px;
+    padding: 10px 0;
     background: transparent;
     border: none;
-    border-bottom: 2px solid var(--ink-color);
+    border-bottom: 2px solid #555;
     border-radius: 0;
-    font-family: 'Lora', serif;
-    font-size: 1.1em;
-    color: var(--accent-color); /* 输入文字也是蓝色 */
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.3em;
+    font-style: italic;
+    color: #fff;
     outline: none;
     text-align: center;
     transition: border-color 0.3s;
@@ -215,29 +244,29 @@ pre {
     border-bottom-color: var(--accent-color);
 }
 #search-input::placeholder {
-    color: #999;
+    color: #444;
 }
 
 #results-container {
     list-style: none;
     padding: 0;
-    margin-top: 10px;
-    background: #fff;
+    margin-top: 5px;
+    background: #000;
     border: 1px solid var(--border-color);
-    box-shadow: 4px 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 8px 8px 0px var(--accent-color);
     position: absolute;
     width: 100%;
     z-index: 100;
 }
 #results-container li {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
+    padding: 12px;
+    border-bottom: 1px solid #333;
     text-align: left;
 }
 #results-container li a {
-    color: var(--accent-color); /* 搜索结果用蓝色 */
-    font-family: 'Lora', serif;
+    color: var(--accent-color);
     font-weight: bold;
+    font-variant: small-caps;
 }
 
 /* =================================================================
@@ -245,33 +274,45 @@ pre {
    ================================================================= */
 .post-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #e0dbcd;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .post-content {
-    font-size: 1.15em;
-    line-height: 1.8;
+    font-size: 1.2em;
+    line-height: 1.7;
     text-align: justify;
+}
+
+/* Drop Cap: Bright Blue */
+.post-content > p:first-of-type::first-letter {
+    font-size: 3.5em;
+    float: left;
+    margin-right: 0.15em;
+    margin-top: -0.1em;
+    line-height: 0.85;
+    color: var(--accent-color);
+    font-style: italic;
 }
 
 .post-content h2,
 .post-content h3 {
-    font-family: 'Playfair Display', serif;
-    margin-top: 2em;
-    color: var(--accent-color); /* 文章内的小标题用蓝色 */
-    border-bottom: 2px solid #e8e4d9;
+    margin-top: 2.5em;
+    color: #fff;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 1px solid var(--accent-color);
     display: inline-block;
     padding-bottom: 5px;
 }
 
 blockquote {
-    border-left: 3px solid var(--accent-color); /* 引用块左侧蓝线 */
-    margin: 20px 0;
+    border-left: 3px solid var(--accent-color);
+    margin: 30px 40px;
     padding-left: 20px;
     font-style: italic;
-    color: #555;
-    background: #f4f7fc; /* 极淡的蓝灰色背景 */
-    padding: 15px 20px;
+    font-size: 1.1em;
+    color: #999;
 }
