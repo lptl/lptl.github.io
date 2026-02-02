@@ -458,7 +458,7 @@ body {
 
     /* 3. Search Bar Width */
     .search-container {
-        width: 100%; /* Use full width on mobile */
+        width: 60%; /* Use full width on mobile */
         margin: 20px 0;
     }
 
