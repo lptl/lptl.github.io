@@ -423,3 +423,106 @@ body {
     transform: translateY(0);
     display: block;
 }
+
+/* =================================================================
+   6. Mobile Responsiveness (The "Pocket Edition")
+   ================================================================= */
+@media screen and (max-width: 768px) {
+
+    /* 1. Adjust Base Sizing */
+    body {
+        padding: 20px 15px; /* Less padding on sides */
+        font-size: 17px;    /* Slightly smaller reading text */
+    }
+
+    .main-content-wrapper {
+        padding: 0;
+    }
+
+    /* 2. Header & Title Adjustments */
+    .site-header {
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+    }
+
+    .site-title {
+        font-size: 2.2em; /* Shrink from 3.8em to fit screen */
+        line-height: 1.2;
+        letter-spacing: 1px;
+        
+        /* Disable typewriter animation on mobile to allow text wrapping */
+        white-space: normal; 
+        animation: none;
+        border-right: none;
+        width: auto;
+    }
+
+    .site-title::after {
+        font-size: 0.4em; /* Adjust subtitle size */
+        margin-top: 10px;
+    }
+
+    /* 3. Search Bar Width */
+    .search-container {
+        width: 100%; /* Use full width on mobile */
+        margin: 20px 0;
+    }
+
+    #search-input {
+        font-size: 1.1em;
+    }
+
+    /* 4. Post List: Stack Vertical instead of Horizontal */
+    .post-entry-box {
+        flex-direction: column; /* Stack title on top of date */
+        align-items: flex-start;
+        padding: 20px 15px;
+    }
+
+    .post-title {
+        font-size: 1.4em; /* Smaller title */
+        margin-bottom: 12px;
+        line-height: 1.3;
+    }
+
+    .post-meta {
+        font-size: 0.9em;
+        width: 100%;
+        display: flex;
+        justify-content: space-between; /* Spread date and tags */
+        align-items: center;
+        border-top: 1px solid #333; /* Add a subtle separator line */
+        padding-top: 10px;
+        margin-top: 5px;
+    }
+
+    .post-type {
+        margin-left: 0; /* Remove left margin since it's on a new line/side */
+    }
+
+    /* 5. Content Typography */
+    .post-content h2, 
+    .post-content h3 {
+        margin-top: 1.5em;
+        font-size: 1.3em;
+        line-height: 1.4;
+    }
+
+    /* Drop Cap adjustment */
+    .post-content > p:first-of-type::first-letter {
+        font-size: 3em; /* Slightly smaller drop cap */
+        margin-top: -0.05em;
+    }
+
+    blockquote {
+        margin: 20px 10px; /* Reduce side margins */
+        padding-left: 15px;
+    }
+
+    /* 6. Code Blocks */
+    pre {
+        padding: 1em;
+        font-size: 0.85em; /* Smaller code font to prevent overflowing */
+        border-left-width: 2px; /* Thinner accent line */
+    }
+}
