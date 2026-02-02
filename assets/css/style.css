@@ -1,218 +1,277 @@
 /* =================================================================
-   1. Animated Background & Typography
+   1. Typography & Background (Vintage Paper + Klein Blue)
    ================================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+    /* 核心配色：青花瓷风格 */
+    --paper-bg: #f4f1ea;       /* 米色纸张背景 */
+    --card-bg: #ffffff;        /* 卡片纯白背景 */
+    --ink-color: #2b2b2b;      /* 深灰色文字（比之前的咖啡色更冷一点，适配蓝色） */
+    
+    /* 重点修改：克莱因蓝 */
+    --accent-color: #002FA7;   
+    
+    --border-color: #d8d2c0;   /* 浅褐色边框 */
+    --shadow-color: #d1c8b4;   /* 硬阴影颜色 */
+}
+
 body {
     margin: 0;
     padding: 40px 20px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #ffffff;
-    background: linear-gradient(-45deg, #436458, #405d83, #278992, #4e4e4e);
-    background-size: 400% 400%;
-    animation: gradientAnimation 20s ease infinite;
+    font-family: 'Lora', 'Georgia', serif;
+    color: var(--ink-color);
+    background-color: var(--paper-bg);
+    /* 纸张纹理 */
+    background-image: 
+        radial-gradient(#d8d2c0 1px, transparent 1px);
+    background-size: 20px 20px;
     min-height: 100vh;
+    line-height: 1.6;
 }
-@keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+
+/* 链接样式 */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
 }
+a:hover {
+    border-bottom: 1px solid var(--accent-color);
+}
+
+/* 代码块 */
 pre, code {
-    font-family: "Andale Mono", "Courier New", Courier, monospace;
-    background-color: rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
+    font-family: "Courier New", Courier, monospace;
+    background-color: #e8e4d9; 
+    border: 1px solid #dcd6c5;
+    border-radius: 2px;
     padding: 2px 5px;
+    color: #001f6b; /* 代码文字也稍微带点深蓝，呼应主题 */
 }
-pre { padding: 1em; overflow-x: auto; text-align: left; }
+pre {
+    padding: 1.5em;
+    overflow-x: auto;
+    border-left: 4px solid var(--accent-color); /* 蓝色的左边框 */
+}
 
 /* =================================================================
-   2. Layout & Containers
+   2. Layout & Header
    ================================================================= */
 .site-header {
     text-align: center;
-    margin-bottom: 40px;
-}
-.site-title {
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #fff;
-    text-decoration: none;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-.main-content-wrapper {
+    margin-bottom: 60px;
+    padding-bottom: 20px;
+    border-bottom: 3px double var(--border-color);
     max-width: 800px;
-    margin: 0 auto;
-    background: rgba(58, 58, 58, 0.4);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: 15px;
-    border: 1px solid rgba(183, 181, 181, 0.18);
-    padding: 2em 3em;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
-    text-align: left;
-}
-.main-content-wrapper img {
-    max-width: 100%;
-    border-radius: 8px;
-    margin-top: 1em;
-}
-
-.post-list-container {
-    /* CHANGED: Reduced max-width to make the list narrower */
-    width: 70%;
-    min-width: 300px;
-    max-width: 700px;
-    margin: 0 auto;
-}
-.post-entry-link {
-    text-decoration: none;
-    display: block;
-    color: inherit;
-}
-.post-entry-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 25px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 20px;
-    background-color: rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-}
-.post-entry-link:hover .post-entry-box {
-    background-color: rgba(0, 0, 0, 0.4);
-    border-color: #ffffff;
-}
-.post-details { flex-grow: 1; }
-.post-title {
-    margin: 0 0 10px 0;
-    font-size: 1.2em;
-    font-weight: 600;
-    color: #ffffff;
-}
-.post-meta {
-    margin: 0;
-    font-size: 0.9em;
-    color: rgba(255, 255, 255, 0.7);
-}
-.post-meta span:not(:last-child)::after { content: ", "; }
-.post-type {
-    text-align: right;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.2;
-    font-size: 0.9em;
-}
-
-/* =================================================================
-   4. Footer and Search Styling (REVISED AND CORRECTED)
-   ================================================================= */
-.site-footer {
-    text-align: center;
-    padding: 40px 20px;
-}
-
-.site-info {
-    margin-bottom: 40px; /* Space between info and search bar */
-}
-.site-description {
-    color: rgba(255, 255, 255, 0.8);
-    max-width: 600px;
-    margin: 0 auto 15px auto; /* Center the description block */
-    line-height: 1.6;
-}
-.site-contact a {
-    color: #89faff;
-    text-decoration: none;
-}
-.site-contact a:hover {
-    text-decoration: underline;
-}
-
-.search-container {
-    position: relative;
-    width: 70%;
-    min-width: 300px;
-    max-width: 700px;
     margin-left: auto;
     margin-right: auto;
 }
+
+.site-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2em;
+    font-weight: 700;
+    color: var(--accent-color); /* 标题直接使用克莱因蓝 */
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.1); /* 柔和阴影 */
+}
+
+.main-content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2em;
+}
+
+.main-content-wrapper img {
+    max-width: 100%;
+    border: 5px solid #fff;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    margin-top: 1em;
+    border-radius: 2px;
+}
+
+/* =================================================================
+   3. Post List (Index Cards Style)
+   ================================================================= */
+.post-list-container {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.post-entry-link {
+    display: block;
+    margin-bottom: 25px;
+    color: inherit !important;
+    text-decoration: none !important;
+    border: none !important;
+}
+
+.post-entry-box {
+    background-color: var(--card-bg);
+    padding: 25px 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
+    box-shadow: 5px 5px 0px var(--shadow-color); /* 默认土黄色阴影 */
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+/* 悬停效果 */
+.post-entry-link:hover .post-entry-box {
+    transform: translate(-2px, -2px);
+    /* 悬停时，阴影变成半透明的克莱因蓝 */
+    box-shadow: 7px 7px 0px rgba(0, 47, 167, 0.2); 
+    border-color: var(--accent-color);
+}
+
+.post-details { flex-grow: 1; }
+
+.post-title {
+    font-family: 'Playfair Display', serif;
+    margin: 0 0 8px 0;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--ink-color);
+    transition: color 0.2s;
+}
+/* 悬停时标题也变蓝 */
+.post-entry-link:hover .post-title {
+    color: var(--accent-color);
+}
+
+.post-meta {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.95em;
+    color: #665c52;
+}
+.post-meta span:not(:last-child)::after {
+    content: " • ";
+    color: #ccc;
+}
+
+.post-type {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    
+    /* 标签颜色 */
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    background-color: #f0f4ff; /* 极淡的蓝色背景 */
+    
+    padding: 4px 8px;
+    border-radius: 2px;
+    margin-left: 20px;
+    white-space: nowrap;
+}
+
+/* =================================================================
+   4. Footer and Search
+   ================================================================= */
+.site-footer {
+    text-align: center;
+    padding: 60px 20px;
+    margin-top: 60px;
+    border-top: 1px dashed #ccc;
+}
+
+.site-description {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    color: #5e5044;
+}
+
+/* Search Box */
+.search-container {
+    width: 60%;
+    margin: 20px auto;
+    position: relative;
+}
+
 #search-input {
     width: 100%;
-    padding: 12px 20px;
-    border-radius: 10px;
-    background-color: rgba(77, 77, 77, 0.3);
-    color: #ffffff;
-    font-size: 1em;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    box-sizing: border-box;
-    transition: background-color 0.3s;
-    
-    /* FIXED: Forcefully removing all potential lines */
+    padding: 12px 10px;
+    background: transparent;
     border: none;
+    border-bottom: 2px solid var(--ink-color);
+    border-radius: 0;
+    font-family: 'Lora', serif;
+    font-size: 1.1em;
+    color: var(--accent-color); /* 输入文字也是蓝色 */
     outline: none;
-    box-shadow: none;
-    -webkit-appearance: none; /* For Safari */
+    text-align: center;
+    transition: border-color 0.3s;
 }
 #search-input:focus {
-    background-color: rgba(54, 54, 54, 0.5);
-    /* Add a subtle border ON FOCUS for a clean look */
-    border: 1px solid rgba(75, 87, 96, 0.5);
-    padding: 11px 19px; /* Adjust padding to account for new border */
-    
-    /* Ensure no outline appears on focus either */
-    outline: none;
-    box-shadow: none;
+    border-bottom-color: var(--accent-color);
 }
-#search-input::placeholder { color: rgba(255, 255, 255, 0.6); }
+#search-input::placeholder {
+    color: #999;
+}
 
 #results-container {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
-    margin: 0;
+    margin-top: 10px;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.05);
     position: absolute;
-    bottom: 110%;
-    left: 0;
-    right: 0;
-    background-color: rgba(80, 80, 88, 0.2);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    max-height: 400px;
-    overflow-y: auto;
-    z-index: 1000;
+    width: 100%;
+    z-index: 100;
 }
 #results-container li {
-    padding: 12px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-bottom: 1px solid #eee;
     text-align: left;
 }
 #results-container li a {
-    display: block;
-    color: #c1eeff;
-    text-decoration: none;
+    color: var(--accent-color); /* 搜索结果用蓝色 */
+    font-family: 'Lora', serif;
+    font-weight: bold;
 }
 
 /* =================================================================
    5. Single Post Page Styling
    ================================================================= */
-
 .post-header {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-
-/* We can reuse the .post-meta style we already have */
-.post .post-meta {
-    font-size: 1em; /* Make it a little bigger than on the card */
-    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0dbcd;
 }
 
 .post-content {
-    line-height: 1.5;
+    font-size: 1.15em;
+    line-height: 1.8;
+    text-align: justify;
 }
 
 .post-content h2,
 .post-content h3 {
+    font-family: 'Playfair Display', serif;
     margin-top: 2em;
+    color: var(--accent-color); /* 文章内的小标题用蓝色 */
+    border-bottom: 2px solid #e8e4d9;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+blockquote {
+    border-left: 3px solid var(--accent-color); /* 引用块左侧蓝线 */
+    margin: 20px 0;
+    padding-left: 20px;
+    font-style: italic;
+    color: #555;
+    background: #f4f7fc; /* 极淡的蓝灰色背景 */
+    padding: 15px 20px;
 }
