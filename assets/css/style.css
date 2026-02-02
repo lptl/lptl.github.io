@@ -204,7 +204,7 @@ pre {
 }
 
 .site-description {
-    font-style: italic;
+
     color: #666;
     font-size: 1em; /* Reduced from 1.1em */
 }
@@ -283,7 +283,6 @@ pre {
     margin-top: -0.1em;
     line-height: 0.85;
     color: var(--accent-color);
-    font-style: italic;
 }
 
 .post-content h2,
