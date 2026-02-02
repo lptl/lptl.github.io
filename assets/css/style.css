@@ -257,8 +257,6 @@ pre {
 }
 #results-container li a {
     color: var(--accent-color);
-    font-weight: bold;
-    font-variant: small-caps;
 }
 
 /* =================================================================
