@@ -435,6 +435,10 @@ body {
         padding-bottom: 15px;
     }
 
+    .post-header {
+        padding-bottom: 0px;
+    }
+
     .site-title {
         font-size: 2.2em; /* Increased for better visibility */
         line-height: 1.2;
@@ -480,7 +484,7 @@ body {
     .post-meta {
         font-size: 0.85em; /* Increased from 0.85em */
         width: 100%;
-        display: flex;
+        /* display: flex; */
         justify-content: space-between;
         align-items: center;
         /* border-top: 1px solid #333; */
