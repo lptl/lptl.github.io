@@ -419,7 +419,7 @@ body {
     /* 1. Adjust Base Sizing */
     body {
         padding: 20px 15px; /* Less padding on sides */
-        font-size: 16px;    /* Comfortable mobile reading size */
+        font-size: 15px;    /* Comfortable mobile reading size */
     }
 
     .main-content-wrapper {
