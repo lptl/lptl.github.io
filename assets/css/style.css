@@ -47,7 +47,7 @@ a {
 }
 a:hover {
     color: #fff;
-    border-bottom: 1px solid #fff;
+    /* border-bottom: 1px solid #fff; */
     text-shadow: 0 0 5px var(--accent-color); /* Glowing effect */
 }
 
@@ -76,7 +76,7 @@ pre {
     text-align: center;
     margin-bottom: 50px; /* Reduced from 70px */
     padding-bottom: 25px; /* Reduced from 30px */
-    border-bottom: 4px double var(--border-color);
+    /* border-bottom: 4px double var(--border-color); */
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -200,7 +200,7 @@ pre {
     text-align: center;
     padding: 50px 20px; /* Reduced from 60px */
     margin-top: 60px; /* Reduced from 80px */
-    border-top: 4px double var(--border-color);
+    /* border-top: 4px double var(--border-color); */
 }
 
 .site-description {
@@ -269,7 +269,7 @@ pre {
     text-align: center;
     margin-bottom: 40px; /* Reduced from 50px */
     padding-bottom: 18px; /* Reduced from 20px */
-    border-bottom: 1px solid var(--border-color);
+    /* border-bottom: 1px solid var(--border-color); */
 }
 
 .post-content {
@@ -296,7 +296,7 @@ pre {
     font-weight: normal;
     text-transform: uppercase;
     letter-spacing: 2px;
-    border-bottom: 1px solid var(--accent-color);
+    /* border-bottom: 1px solid var(--accent-color); */
     display: inline-block;
     padding-bottom: 5px;
     font-size: 1.1em; /* Added explicit smaller size */
@@ -486,7 +486,7 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-top: 1px solid #333;
+        /* border-top: 1px solid #333; */
         padding-top: 10px;
         margin-top: 5px;
     }
