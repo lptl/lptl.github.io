@@ -354,7 +354,6 @@ body {
     pointer-events: none;
     z-index: 9999;
     opacity: 0.05; /* Keep it very subtle */
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 /* In style.css */
@@ -427,7 +426,7 @@ body {
     /* 1. Adjust Base Sizing */
     body {
         padding: 20px 15px; /* Less padding on sides */
-        font-size: 14px;    /* Newspaper size for mobile */
+        font-size: 18px;    /* Newspaper size for mobile */
     }
 
     .main-content-wrapper {
@@ -441,7 +440,7 @@ body {
     }
 
     .site-title {
-        font-size: 1.8em; /* Reduced from 2.2em */
+        font-size: 2.0em; /* Reduced from 2.2em */
         line-height: 1.2;
         letter-spacing: 1px;
         
