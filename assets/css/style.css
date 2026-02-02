@@ -34,8 +34,8 @@ body {
     color: var(--ink-color);
     background-color: var(--paper-bg);
     min-height: 100vh;
-    line-height: 1.5; /* Tighter line height for newspaper density */
-    font-size: 11px; /* Reduced from 14px - classic newspaper body size */
+    line-height: 1.6;
+    font-size: 16px; /* Increased for better readability */
     
     /* Subtle Grain Texture for the dark background */
     background-image: 
@@ -64,7 +64,7 @@ pre, code {
     border: 1px solid var(--border-color);
     padding: 2px 5px;
     color: #8daaff; /* Pastel blue for code text */
-    font-size: 10px; /* Smaller code font */
+    font-size: 14px; /* Increased for readability */
 }
 pre {
     padding: 1.5em;
@@ -88,17 +88,8 @@ pre {
     position: relative;
 }
 
-.site-header::before {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 1px;
-    background: var(--border-color);
-    margin-bottom: 5px;
-}
-
 .site-title {
-    font-size: 2.8em; /* Reduced from 3.8em */
+    font-size: 3.5em; /* Increased for impact */
     font-weight: normal;
     color: var(--ink-color); /* White title */
     letter-spacing: 2px;
@@ -176,7 +167,7 @@ pre {
 
 .post-title {
     margin: 0 0 8px 0; /* Reduced from 10px */
-    font-size: 1.4em; /* Reduced from 1.8em */
+    font-size: 1.8em; /* Increased for readability */
     font-weight: normal;
     color: #fff;
     font-style: normal;
@@ -187,7 +178,7 @@ pre {
 }
 
 .post-meta {
-    font-size: 0.95em; /* Reduced from 1em */
+    font-size: 1.1em; /* Increased for readability */
     color: #888; /* Dim grey for metadata */
     font-variant: small-caps;
     letter-spacing: 1px;
@@ -195,7 +186,7 @@ pre {
 }
 
 .post-type {
-    font-size: 0.7em; /* Reduced from 0.75em */
+    font-size: 0.85em; /* Increased for readability */
     text-transform: uppercase;
     font-family: var(--font-mono);
     letter-spacing: 2px;
