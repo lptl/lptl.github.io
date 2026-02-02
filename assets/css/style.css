@@ -21,13 +21,16 @@
     
     /* Shadow: Pure Black for depth */
     --shadow-color: #000000;
+
+    --font-serif: "Times New Roman", Times, serif;      /* For Titles & Story */
+    --font-mono: "Courier New", Courier, monospace;     /* For Data & UI */
 }
 
 body {
     margin: 0;
     padding: 40px 20px;
     /* Times New Roman Only */
-    font-family: "Times New Roman", Times, serif; 
+    font-family: var(--font-serif);
     color: var(--ink-color);
     background-color: var(--paper-bg);
     min-height: 100vh;
@@ -55,7 +58,7 @@ a:hover {
 
 /* Code: Dark terminal style */
 pre, code {
-    font-family: "Times New Roman", Times, serif;
+    font-family: var(--font-mono);
     font-style: italic;
     background-color: #000; /* Pitch black background for code */
     border: 1px solid var(--border-color);
@@ -187,11 +190,13 @@ pre {
     color: #888; /* Dim grey for metadata */
     font-variant: small-caps;
     letter-spacing: 1px;
+    font-family: var(--font-mono);
 }
 
 .post-type {
     font-size: 0.75em;
     text-transform: uppercase;
+    font-family: var(--font-mono);
     letter-spacing: 2px;
     color: #000;
     background-color: var(--accent-color); /* Blue pill */
@@ -460,6 +465,7 @@ body {
     .site-title::after {
         font-size: 0.4em; /* Adjust subtitle size */
         margin-top: 10px;
+        font-family: var(--font-mono);
     }
 
     /* 3. Search Bar Width */
