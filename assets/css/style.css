@@ -36,11 +36,6 @@ body {
     min-height: 100vh;
     line-height: 1.6;
     font-size: 16px; /* Increased for better readability */
-    
-    /* Subtle Grain Texture for the dark background */
-    background-image: 
-        radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 20px 20px;
 }
 
 /* Links: High contrast blue */
@@ -224,21 +219,23 @@ pre {
 
 #search-input {
     width: 100%;
-    padding: 10px 0;
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid #555;
+    padding: 15px 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
     border-radius: 0;
     font-family: "Times New Roman", Times, serif;
-    font-size: 1.2em; /* Reduced from 1.3em */
+    font-size: 1.2em;
     font-style: italic;
     color: #fff;
     outline: none;
     text-align: center;
-    transition: border-color 0.3s;
+    transition: all 0.3s;
+    box-shadow: 3px 3px 0px #000;
 }
 #search-input:focus {
-    border-bottom-color: var(--accent-color);
+    border-color: var(--accent-color);
+    box-shadow: 5px 5px 0px var(--accent-color);
+    background: #252525;
 }
 #search-input::placeholder {
     color: #444;

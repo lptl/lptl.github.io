@@ -1,44 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale.io">
-    <title>{{ page.title | default: site.title }}</title>
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ page.title | default: site.title }}</title>
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
-    <header class="site-header">
+<header class="site-header">
+<h1 class="site-title">{{ site.title }}</h1>
         {% if page.url == '/' %}
-            <div class="search-container">
-                <input type="text" id="search-input" placeholder="Search posts...">
-                <ul id="results-container"></ul>
-            </div>
+<div class="search-container">
+<input type="text" id="search-input" placeholder="Search posts...">
+<ul id="results-container"></ul>
+</div>
         {% endif %}
-    </header>
-
-    <main>
+</header>
+<main>
         {% if page.url == '/' %}
             {{ content }}
         {% else %}
-            <div class="main-content-wrapper">
+<div class="main-content-wrapper">
                 {{ content }}
-            </div>
+</div>
         {% endif %}
-    </main>
-
+</main>
     {% if page.url == '/' %}
-    <footer class="site-footer">
-        <div class="site-info">
-            <p class="site-description">{{ site.description }}</p>
-            <p class="site-contact">
-                <a href="mailto:{{ site.email }}">{{ site.email }}</a>
-            </p>
-        </div>
-    </footer>
-
-    <script src="https://unpkg.com/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script>
-    <script>
-        var sjs = SimpleJekyllSearch({
+<footer class="site-footer">
+<div class="site-info">
+<p class="site-description">{{ site.description }}</p>
+<p class="site-contact">
+<a href="mailto:{{ site.email }}">{{ site.email }}</a>
+</p>
+</div>
+</footer>
+<script src="https://unpkg.com/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script>
+<script>
+var sjs = SimpleJekyllSearch({
             searchInput: document.getElementById('search-input'),
             resultsContainer: document.getElementById('results-container'),
             json: '{{ "/search.json" | relative_url }}',
@@ -46,8 +44,18 @@
             noResultsText: '<li>No results found</li>',
             limit: 10,
             fuzzy: false
-        });
-    </script>
+});
+
+// Show/hide results container based on input
+document.getElementById('search-input').addEventListener('keyup', function() {
+    var resultsContainer = document.getElementById('results-container');
+    if (this.value.length > 0) {
+        resultsContainer.classList.add('visible');
+    } else {
+        resultsContainer.classList.remove('visible');
+    }
+});
+</script>
     {% endif %}
 </body>
 </html>
