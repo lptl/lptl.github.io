@@ -101,7 +101,6 @@ pre {
     color: var(--accent-color); /* Blue subtitle */
     margin-top: 12px; /* Reduced from 15px */
     letter-spacing: 4px;
-    font-variant: small-caps;
 }
 
 .main-content-wrapper {
