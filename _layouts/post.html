@@ -7,14 +7,14 @@ layout: default
     <h2 class="post-title">{{ page.title | escape }}</h2>
     <p class="post-meta">
         <!-- Date in YYYY.MM.DD format -->
-        <span>{{ page.date | date: "%Y.%m.%d" }}</span>
+        <span>{{ page.date | date: "%Y.%m.%d" }} with </span>
 
         <!-- Calculate Word Count -->
         {% assign words = content | number_of_words %}
         {% if words < 1000 %}
-          <span>{{ words }} words</span>
+          <span>{{ words }} words and </span>
         {% else %}
-          <span>{{ words | divided_by: 1000.0 | round: 1 }}k words</span>
+          <span>{{ words | divided_by: 1000.0 | round: 1 }}k words and </span>
         {% endif %}
 
         <!-- Calculate Image Count -->
