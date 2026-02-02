@@ -316,3 +316,110 @@ blockquote {
     font-size: 1.1em;
     color: #999;
 }
+
+/* Add this to the bottom of style.css */
+
+/* 1. Page Load Animation: Content slowly rises from darkness */
+@keyframes revealPage {
+    0% { opacity: 0; transform: translateY(15px); filter: blur(5px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+body {
+    /* Apply the animation */
+    animation: revealPage 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* 2. Custom Scrollbar (Chrome/Safari/Edge) - Hides the ugly white bar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--paper-bg); 
+}
+::-webkit-scrollbar-thumb {
+    background: #333; 
+    border: 1px solid var(--paper-bg);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color); 
+}
+
+/* 3. Text Selection Color */
+::selection {
+    background: var(--accent-color);
+    color: #fff;
+    text-shadow: none;
+}
+
+/* 4. Film Grain Overlay (Optional but recommended for Noir feel) */
+.grain-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.05; /* Keep it very subtle */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* In style.css */
+.post-entry-link {
+    opacity: 0; /* Hidden by default */
+    animation: fadeSlideIn 0.8s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Stagger delays for up to 10 items */
+.post-entry-link:nth-child(1) { animation-delay: 0.1s; }
+.post-entry-link:nth-child(2) { animation-delay: 0.2s; }
+.post-entry-link:nth-child(3) { animation-delay: 0.3s; }
+.post-entry-link:nth-child(4) { animation-delay: 0.4s; }
+/* ... add more if needed */
+
+/* Typewriter Effect for the Header */
+.typewriter-text {
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    border-right: 2px solid var(--accent-color); /* The cursor */
+    
+    /* Animation settings */
+    width: 0;
+    animation: 
+        typing 2s steps(30, end) forwards,
+        blink-caret 0.75s step-end infinite;
+}
+
+/* Make sure the cursor disappears after typing is done */
+.typewriter-text {
+    animation-delay: 0.5s; /* Wait a moment before starting */
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% } /* or a specific width like 12ch if you know the character count */
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--accent-color) }
+}
+
+#results-container {
+    /* Existing styles... */
+    display: none; /* Controlled by JS, but visually: */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+/* Add a class via JS when results are found, e.g., 'visible' */
+#results-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+    display: block;
+}
